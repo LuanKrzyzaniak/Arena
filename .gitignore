@@ -1,5 +1,7 @@
 # Frontend files
-/node_modules
+
+
+node_modules
 /.pnp
 .pnp.js
 
@@ -18,5 +20,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # Backend files
-/node_modules
+node_modules
 /.env
