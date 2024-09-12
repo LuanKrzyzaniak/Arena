@@ -11,7 +11,7 @@ async function store(req, res) {
         body.email,
         null,
         null,
-        body.birthday
+        body.birthdate
     );
 
     let creationResponse = await user.save();

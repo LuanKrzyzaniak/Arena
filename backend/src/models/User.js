@@ -1,8 +1,9 @@
 const db = require("../database");
+const bcrypt = require("bcrypt");
 
 class User {
     constructor(
-        userId,
+        id,
         username,
         displayname,
         password,
@@ -11,7 +12,7 @@ class User {
         sports,
         birthdate
     ) {
-        this.userId = userId;
+        this.id = id;
         this.username = username;
         this.displayname = displayname;
         this.password = password;
@@ -22,25 +23,82 @@ class User {
     }
 
     // Send new user to database
+    // TODO: Maybe its better to put query in a try/catch and treat errors
     async save() {
-        // generate id
         // encrypt password
+        this.password = await bcrypt.hash(this.password, 10);
 
-        const client = await db.connect();
+        // connect to db
+        const dbClient = await db.connect();
+
+        // generate unique id
+        this.id = await generateId();
+
+        // check if user isn't in db
+        const checkedUser = await dbClient.query(
+            'SELECT * FROM client WHERE username=$1 OR email=$2',
+            [this.username, this.email]
+        );
+
+        if(checkedUser.rowCount > 0)
+        {
+            let response = {
+                statusCode: 409,
+                description: "User already exists"
+            }
+
+            return response;
+        }
+
         // send to db (query)
-        client.release();
+        const createUser = await dbClient.query(
+            'INSERT INTO client (id, username, pass, email, birthdate) VALUES ($1, $2, $3, $4, $5)',
+            [this.id, this.username, this.password, this.email, this.birthdate]
+        );
+
+        // drop db connection
+        dbClient.release();
 
         // create response
+        let response = {
+            statusCode: 201,
+            user: {
+                id: this.id,
+                username: this.username,
+                email: this.email,
+                birthdate: this.birthdate
+            }
+        }
+
         // return response
+        return response;
     }
 
     // Search for user using id
-    static getById(id) {
+    static async getById(id) {
+        const dbClient = await db.connect();
+        const res = await db.query("SELECT id, username, email FROM client WHERE id=$1", [id]);
+        dbClient.release();
 
+        return { rows: res.rows, rowCount: res.rowCount };
     }
 
-    static getByEmail(email) {
+    static async getByEmail(email) {
 
+    }
+}
+
+async function generateId() {
+    let exit = false;
+
+    while (exit == false) {
+        id = Math.floor(100000 + Math.random() * 900000);
+
+        const userWithId = (await User.getById(id));
+        if (userWithId.rowCount == 0) {
+            exit = true;
+            return id;
+        }
     }
 }
 
