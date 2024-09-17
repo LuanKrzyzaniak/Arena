@@ -25,30 +25,11 @@ class User {
     // Send new user to database
     // TODO: Maybe its better to put query in a try/catch and treat errors
     async save() {
-        // encrypt password
-        this.password = await bcrypt.hash(this.password, 10);
-
-        // connect to db
-        const dbClient = await db.connect();
-
-        // generate unique id
-        this.id = await generateId();
-
-        // check if user isn't in db
-        const checkedUser = await User.getByEmail(this.email);
-
-        if(checkedUser.rowCount > 0)
-        {
-            let response = {
-                statusCode: 409,
-                description: "User already exists"
-            }
-
-            return response;
-        }
+        // connect db
+        const dbClient = db.connect();
 
         // send to db (query)
-        const createUser = await dbClient.query(
+        const createdUser = await dbClient.query(
             'INSERT INTO client (id, username, pass, email, birthdate) VALUES ($1, $2, $3, $4, $5)',
             [this.id, this.username, this.password, this.email, this.birthdate]
         );
@@ -59,12 +40,7 @@ class User {
         // create response
         let response = {
             statusCode: 201,
-            user: {
-                id: this.id,
-                username: this.username,
-                email: this.email,
-                birthdate: this.birthdate
-            }
+            createdUser
         }
 
         // return response
@@ -74,7 +50,7 @@ class User {
     // Search for user using id
     static async getById(id) {
         const dbClient = await db.connect();
-        const res = await db.query("SELECT id, username, email FROM client WHERE id=$1", [id]);
+        const res = await db.query("SELECT id, username, email, pass FROM client WHERE id=$1", [id]);
         dbClient.release();
 
         return { rows: res.rows, rowCount: res.rowCount };
@@ -82,7 +58,7 @@ class User {
 
     static async getByEmail(email) {
         const dbClient = await db.connect();
-        const res = await db.query("SELECT id, username, email FROM client WHERE email=$1", [email]);
+        const res = await db.query("SELECT id, username, email, pass FROM client WHERE email=$1", [email]);
         dbClient.release();
 
         return { rows: res.rows, rowCount: res.rowCount };
@@ -95,7 +71,7 @@ async function generateId() {
     while (exit == false) {
         id = Math.floor(100000 + Math.random() * 900000);
 
-        const userWithId = (await User.getById(id));
+        const userWithId = await User.getById(id);
         if (userWithId.rowCount == 0) {
             exit = true;
             return id;
