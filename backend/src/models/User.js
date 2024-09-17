@@ -35,10 +35,7 @@ class User {
         this.id = await generateId();
 
         // check if user isn't in db
-        const checkedUser = await dbClient.query(
-            'SELECT * FROM client WHERE username=$1 OR email=$2',
-            [this.username, this.email]
-        );
+        const checkedUser = await User.getByEmail(this.email);
 
         if(checkedUser.rowCount > 0)
         {
@@ -84,7 +81,11 @@ class User {
     }
 
     static async getByEmail(email) {
+        const dbClient = await db.connect();
+        const res = await db.query("SELECT id, username, email FROM client WHERE email=$1", [email]);
+        dbClient.release();
 
+        return { rows: res.rows, rowCount: res.rowCount };
     }
 }
 
