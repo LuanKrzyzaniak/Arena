@@ -1,25 +1,13 @@
-const User = require("../models/User")
+const User = require("../models/User");
+const bcrypt = require("bcrypt");
 
 async function store(req, res) {
     const { body } = req;
 
-    // check if user isn't in db
-    const checkedUser = await User.getByEmail(body.email);
-    if(checkedUser.rowCount > 0)
-    {
-        return res.status(409).json({
-            statusCode: 409,
-            description: "User already exists"
-        });
-    }
-
-    // encrypt password
     body.password = await bcrypt.hash(body.password, 10);
 
-    // generate unique id
     body.id = await generateId();
 
-    // create user
     let user = new User(
         body.id,
         body.username,
@@ -30,9 +18,22 @@ async function store(req, res) {
         null,
         body.birthdate
     );
-    let creationResponse = await user.save();
 
-    return res.status(creationResponse.statusCode).json(creationResponse);
+    try {
+        let createdUser = await user.save();
+
+        return res.status(201).json({
+            statusCode: 201,
+            user: createdUser
+        });
+
+    } catch (error) {
+        return res.status(400).json({
+            statusCode: 400,
+            errorDetail: error.detail,
+            errorTable: error.table
+        });
+    }
 }
 
 async function login(req, res) {
@@ -41,19 +42,72 @@ async function login(req, res) {
 
 // User profile will be retrieved using its id
 async function list(req, res) {
-    const { id } = req.id;
+    const { id } = req.params;
 
-    const user = await User.getById(id);
+    try {
+        const user = await User.getById(id);
+        if (user == null)
+            throw { detail: `User ${id} not found`, table: "client" }
 
-    return res.status(user.statusCode).json(user);
+        return res.status(200).json(user);
+    } catch (error) {
+        return res.status(404).json({
+            statusCode: 404,
+            errorDetail: error.detail,
+            errorTable: error.table
+        });
+    }
 }
 
 async function edit(req, res) {
+    const { updateArrayInfo } = req.body;
+    const { id } = req;
 
+    let user = new User(
+        //id,
+        725962,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    );
+
+    try {
+        await user.update(updateArrayInfo);
+
+        return res.status(200).json({
+            statusCode: 200,
+            description: "User updated"
+        })
+    } catch(error) {
+        return res.status(400).json({
+            statusCode: 400,
+            errorDetail: error.detail,
+            errorTable: error.table
+        });
+    }
 }
 
 async function remove(req, res) {
 
+}
+
+// Just an aux function
+async function generateId() {
+    let exit = false;
+
+    while (exit == false) {
+        id = Math.floor(100000 + Math.random() * 900000);
+
+        const userWithId = await User.getById(id);
+        if (userWithId == null) {
+            exit = true;
+            return id;
+        }
+    }
 }
 
 module.exports = { store, login, list, edit, remove };

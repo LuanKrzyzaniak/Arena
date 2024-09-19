@@ -1,5 +1,4 @@
 const db = require("../database");
-const bcrypt = require("bcrypt");
 
 class User {
     constructor(
@@ -23,59 +22,90 @@ class User {
     }
 
     // Send new user to database
-    // TODO: Maybe its better to put query in a try/catch and treat errors
     async save() {
-        // connect db
-        const dbClient = db.connect();
+        const dbClient = await db.connect();
 
-        // send to db (query)
-        const createdUser = await dbClient.query(
+        await dbClient.query(
             'INSERT INTO client (id, username, pass, email, birthdate) VALUES ($1, $2, $3, $4, $5)',
             [this.id, this.username, this.password, this.email, this.birthdate]
         );
 
-        // drop db connection
         dbClient.release();
 
-        // create response
-        let response = {
-            statusCode: 201,
-            createdUser
-        }
+        return this;
+    }
 
-        // return response
-        return response;
+    async update(updateArrayInfo) {
+        const dbClient = await db.connect();
+        let updateQueryArray = [];
+        
+        for(let i = 0; i < updateArrayInfo.length; i++)
+        {
+            if(updateArrayInfo[i].new)
+                updateQueryArray.push(updateArrayInfo[i].new);
+            else
+                updateQueryArray.push(updateArrayInfo[i].old);
+        }
+        updateQueryArray.push(this.id);
+        
+        await dbClient.query(`UPDATE client SET username=$1, displayname=$2, email=$3, birthdate=$4  WHERE id=$5`, updateQueryArray);
+
+        dbClient.release();
     }
 
     // Search for user using id
     static async getById(id) {
         const dbClient = await db.connect();
-        const res = await db.query("SELECT id, username, email, pass FROM client WHERE id=$1", [id]);
+        const res = await db.query("SELECT * FROM client WHERE id=$1", [id]);
         dbClient.release();
 
-        return { rows: res.rows, rowCount: res.rowCount };
+        if(res.rowCount == 0)
+            return null;
+
+        let user = res.rows[0];
+        return new User(user.id,
+            user.username,
+            user.displayname,
+            user.pass,
+            user.email,
+            user.description,
+            user.sports,
+            user.birthdate
+        );
     }
 
     static async getByEmail(email) {
         const dbClient = await db.connect();
-        const res = await db.query("SELECT id, username, email, pass FROM client WHERE email=$1", [email]);
+        const res = await db.query("SELECT * FROM client WHERE email=$1", [email]);
         dbClient.release();
 
-        return { rows: res.rows, rowCount: res.rowCount };
+        let user = res.rows[0];
+        return new User(user.id,
+            user.username,
+            user.displayname,
+            user.pass,
+            user.email,
+            user.description,
+            user.sports,
+            user.birthdate
+        );
     }
-}
 
-async function generateId() {
-    let exit = false;
+    static async getByUsername(username) {
+        const dbClient = await db.connect();
+        const res = await db.query("SELECT * FROM client WHERE username=$1", [username]);
+        dbClient.release();
 
-    while (exit == false) {
-        id = Math.floor(100000 + Math.random() * 900000);
-
-        const userWithId = await User.getById(id);
-        if (userWithId.rowCount == 0) {
-            exit = true;
-            return id;
-        }
+        let user = res.rows[0];
+        return new User(user.id,
+            user.username,
+            user.displayname,
+            user.pass,
+            user.email,
+            user.description,
+            user.sports,
+            user.birthdate
+        );
     }
 }
 
