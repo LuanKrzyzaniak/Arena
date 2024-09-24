@@ -1,0 +1,119 @@
+.R_main{
+    background-color: #202020;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red;  */
+
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#h1_R{
+    margin-top: 0.5;
+    color: aliceblue;
+    padding-top: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5em;
+}
+
+.sub_main{
+    border: 1px solid red; 
+    height: 40em;
+
+}
+
+.inputs_R{
+    background-color: #202020;
+    padding: 10px 110px 10px 10px;
+    border: none;
+    border-bottom: 2px solid gray;
+    border-radius: 5px;
+    margin-bottom: 3em;
+    color: aliceblue;
+}
+
+.bar{
+    margin-left: .2em;
+    margin-right: .2em;
+}
+
+.date{
+    display: flex;
+    color: #fff;
+    /* border: 1px solid blue; */
+    margin-bottom: 0.5em;
+
+}
+.inputData{
+    font-size: 12px;
+    width: 3.5em;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid gray;
+    border-radius: 5px;
+    color: aliceblue;
+}
+#day{
+    margin-left: 0em;
+}
+
+
+.inputs_R2{
+    background-color: #202020;
+    padding: 10px 10px 10px 10px;
+    width: 9em;
+    border: none;
+    margin-bottom: 2em;
+    border-bottom: 2px solid gray;
+    border-radius: 5px;
+    color: aliceblue;
+
+}
+
+.div_R{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.div_R2{
+    background-color: #202020;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.inputs_test{
+    width: 10em;
+}
+
+#button_R{
+    color: aliceblue;
+    background-color: red;
+    font-size: 12px;
+    border-radius: 13px;
+    padding: 10px;
+    border: none;
+    margin: 1em;
+    width: 14em;
+}
+
+.div_button{
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+label{float: left;}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
