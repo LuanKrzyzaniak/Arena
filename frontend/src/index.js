@@ -10,14 +10,15 @@ import Home from './pages/Home/Home';
 
 
 const router = createBrowserRouter([
-  {path:'/',
-    element:<Home />,
-    errorElement: <ErrorPage/>
+  {
+    path: '/',
+    element: <Home />,
+    errorElement: <ErrorPage />
   },
 
   {
-    path:'/login',
-    element: <LoginPage/>,
+    path: '/login',
+    element: <LoginPage />,
   }
 ])
 
@@ -27,6 +28,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

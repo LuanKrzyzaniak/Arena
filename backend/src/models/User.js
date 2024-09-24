@@ -146,18 +146,4 @@ class User {
     }
 }
 
-async function generateId() {
-    let exit = false;
-
-    while (exit == false) {
-        id = Math.floor(100000 + Math.random() * 900000);
-
-        const userWithId = await User.getById(id);
-        if (userWithId.rowCount == 0) {
-            exit = true;
-            return id;
-        }
-    }
-}
-
 module.exports = User;
