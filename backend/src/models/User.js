@@ -22,6 +22,7 @@ class User {
     }
 
     // Send new user to database
+    // Send new user to database
     async save() {
         const dbClient = await db.connect();
 
@@ -38,16 +39,15 @@ class User {
     async update(updateArrayInfo) {
         const dbClient = await db.connect();
         let updateQueryArray = [];
-        
-        for(let i = 0; i < updateArrayInfo.length; i++)
-        {
-            if(updateArrayInfo[i].new)
+
+        for (let i = 0; i < updateArrayInfo.length; i++) {
+            if (updateArrayInfo[i].new)
                 updateQueryArray.push(updateArrayInfo[i].new);
             else
                 updateQueryArray.push(updateArrayInfo[i].old);
         }
         updateQueryArray.push(this.id);
-        
+
         await dbClient.query(`UPDATE client SET username=$1, displayname=$2, email=$3, birthdate=$4  WHERE id=$5`, updateQueryArray);
 
         dbClient.release();
@@ -59,7 +59,7 @@ class User {
         const res = await db.query("SELECT * FROM client WHERE id=$1", [id]);
         dbClient.release();
 
-        if(res.rowCount == 0)
+        if (res.rowCount == 0)
             return null;
 
         let user = res.rows[0];
@@ -106,6 +106,57 @@ class User {
             user.sports,
             user.birthdate
         );
+    }
+
+    async verifyLogin(email, password) {
+        try {
+            const dbClient = db.connect();
+            const res = await db.query(
+                "SELECT email,pass FROM client WHERE email = $1",
+                [email]
+            );
+
+            const hashed = res.rows[0].pass;
+            let isValid = await bcrypt.compare(password, hashed);
+            if (isValid) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+    }
+
+    async deleteById(id) {
+        try {
+            const dbClient = db.connect();
+            const res = await db.query(
+                'DELETE FROM client WHERE id = $1', [id]
+            );
+            if (res.rowCount > 0) {
+                return true;
+            }
+            return false;
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+    }
+}
+
+async function generateId() {
+    let exit = false;
+
+    while (exit == false) {
+        id = Math.floor(100000 + Math.random() * 900000);
+
+        const userWithId = await User.getById(id);
+        if (userWithId.rowCount == 0) {
+            exit = true;
+            return id;
+        }
     }
 }
 
