@@ -20,7 +20,6 @@
 }
 
 .sub_main{
-    border: 1px solid red; 
     height: 40em;
 
 }
@@ -30,7 +29,7 @@
     padding: 10px 110px 10px 10px;
     border: none;
     border-bottom: 2px solid gray;
-    border-radius: 5px;
+    border-radius: 3px;
     margin-bottom: 3em;
     color: aliceblue;
 }
@@ -53,7 +52,7 @@
     border: none;
     background-color: transparent;
     border-bottom: 2px solid gray;
-    border-radius: 5px;
+    border-radius: 3px;
     color: aliceblue;
 }
 #day{
@@ -68,7 +67,7 @@
     border: none;
     margin-bottom: 2em;
     border-bottom: 2px solid gray;
-    border-radius: 5px;
+    border-radius: 3px;
     color: aliceblue;
 
 }
@@ -97,7 +96,7 @@
     color: aliceblue;
     background-color: red;
     font-size: 12px;
-    border-radius: 13px;
+    border-radius: 4px;
     padding: 10px;
     border: none;
     margin: 1em;
