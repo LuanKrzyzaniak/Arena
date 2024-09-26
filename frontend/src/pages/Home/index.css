@@ -1,37 +1,43 @@
-* {
-    margin: 0;
-    padding: 0;
+.Home-welcome {
+    margin-top: var(--navbar-height);
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("./welcomebg.png");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    height: 100%;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
 }
 
-body {
-    background: #202020;
-}
-
-.Home-tournments {
-    padding: 2rem 0;
-    color: #fff;
-    font-family: sans-serif;
+.Home-welcome h1 {
+    font-family: 'Rubik Dirt';
     text-align: center;
+    color: #FFF;
+    font-size: 2.25rem;
+    font-weight: 400;
+    text-transform: uppercase;
 }
 
-.Home-tournments-cards {
-    display: grid;
-    padding: 2.5rem 2.5rem;
-    gap: 1rem;
+.Home-welcome img {
+    width: 60%;
 }
 
-.Home-tournments-cards-card {
+.Home-selectgame {
     background-color: #000;
-    border-radius: 10px;
-    padding: 1rem 4rem 2rem 4rem;
-    font-weight: 600;
-    font-size: 0.75rem;
+    
+    padding: 1rem 0rem;
 }
 
-.Home-tournments-cards-card:hover {
-    cursor: pointer;
+.Home-selectgame h2 {
+    padding-left: 2rem;
+    font-family: 'Rubik Dirt';
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: #FFF;
 }
 
-.Home-tournments-cards-card span {
-    font-size: 1.75rem;
+.Home-carousel img{
+    height: 100px;
 }
