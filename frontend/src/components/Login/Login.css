@@ -46,18 +46,25 @@ h1{
     border-bottom: 2px solid gray;
     border-radius: 5px;
     color: aliceblue;
+    outline:none
+
+}
+.inputs,.inputs_R,.inputData,.inputs_R2{
+    outline:none;
+
 }
 
 #button{
     color: aliceblue;
     background-color: red;
     font-size: 12px;
-    border-radius: 13px;
+    border-radius: 4px;
     padding: 10px;
     border: none;
     margin: 1em;
     width: 14em;
 }
+
 #forgot{
     border: none;
     background-color: transparent;
