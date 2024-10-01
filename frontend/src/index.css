@@ -5,4 +5,10 @@
 
 :root {
     --navbar-height: 4rem;
+    --background-color: #000000;
+    --primary-color: #f33b3b;
+}
+
+body {
+    background-color: var(--background-color);
 }

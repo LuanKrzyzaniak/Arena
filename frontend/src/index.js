@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom/client';
 
 //routes
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LoginPage from './pages/LoginPage/LoginPage';
-import ErrorPage from './pages/ErrorPage/ErrorPage';
-import Home from './pages/Home/Home';
-import RegisterPage from './pages/RegisterPage/RegisterPage';
+
+import LoginPage from './pages/Login';
+import NewLogin from './pages/NewLogin';
+import ErrorPage from './pages/Error';
+import Home from './pages/Home';
+import RegisterPage from './pages/Register';
 
 import "./index.css";
 
@@ -16,14 +18,13 @@ const router = createBrowserRouter([
     element: <Home />,
     errorElement: <ErrorPage />
   },
-
   {
     path: '/login',
-    element: <LoginPage />,
+    element: <NewLogin />,
   },
   {
-    path:'/register',
-    element:<RegisterPage/>
+    path: '/register',
+    element: <RegisterPage />
   }
 ])
 
