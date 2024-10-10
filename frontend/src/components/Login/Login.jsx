@@ -30,7 +30,6 @@ function Login() {
       <div class="loginDiv">
         <input class='inputs'type='text' onChange={(e)=> setEmail(e.currentTarget.value)}  placeholder='Email'></input>
         <input class='inputs'type='password' onChange={(e)=> setPassword(e.currentTarget.value)} placeholder='Senha'></input>
-        <h1 >Esqueci minha senha</h1>
         <button onClick={handleSubmit} id='button'>ENTRAR</button>
         <button id='forgot'>Esqueci minha senha</button>
       </div>

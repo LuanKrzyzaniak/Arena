@@ -11,11 +11,7 @@ function Register() {
   const [day,setDay] = React.useState("");
   const [month,setMonth] = React.useState("");
   const [year,setYear] = React.useState("");
-  
-
-
   const navigate  = useNavigate();
-
   async function handleSubmit(){
     if(password == confirm){
       const birthdate = `${year}-${month}-${day}`;
@@ -31,31 +27,25 @@ function Register() {
       }
     }else{
       alert("Senhas diferentes")
-    }
-
-
-    
+    }    
   }
-
   return (
-    
-
     <div className="R_main">
       <div className="sub_main">
         <h1 id="h1_R">Cadastro de usuário</h1>
         <div className="div_R">
           <input onChange={(e)=> setEmail(e.currentTarget.value)} className="inputs_R" placeholder="Email"></input>
-          <input onChange={(e)=> setPassword(e.currentTarget.value)}className="inputs_R" placeholder="Nome de Usuário"></input>
+          <input onChange={(e)=> setUsername(e.currentTarget.value)}className="inputs_R" placeholder="Nome de Usuário"></input>
         </div>
         <div className="div_R2">
             <div className="date">
-                <input onChange={(e)=> setDay(e.currentTarget.value)} id="day" type="number" className="inputData" placeholder="Dia"></input>
+                <input min={1} step={1} max={31} onChange={(e)=> setDay(e.currentTarget.value)} id="day" type="number" className="inputData" placeholder="Dia"></input>
                 <p className="bar">/</p>
-                <input onChange={(e)=> setMonth(e.currentTarget.value)} type="number" className="inputData" placeholder="Mês"></input>
+                <input min={1} step={1} max={12} onChange={(e)=> setMonth(e.currentTarget.value)} type="number" className="inputData" placeholder="Mês"></input>
                 <p className="bar">/</p>
-                <input onChange={(e)=> setYear(e.currentTarget.value)} type="number" className="inputData" placeholder="Ano"></input>
+                <input min={1800} step={1} max={3000} onChange={(e)=> setYear(e.currentTarget.value)} type="number" className="inputData" placeholder="Ano"></input>
             </div>
-          <input className="inputs_R2" placeholder="Número de telefone"></input>
+          <input min={1} step={1} className="inputs_R2" placeholder="Número de telefone"></input>
         </div>
         <div className="div_R">
           <input
