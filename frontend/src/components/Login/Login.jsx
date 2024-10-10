@@ -3,15 +3,18 @@ import React ,{useEffect,UseState} from "react";
 import axios from '../../axiosConfig'
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png" 
+import Auth from "../Auth/Auth";
 function Login() {
 
   const [email,setEmail] = React.useState("");
   const [password,setPassword] = React.useState("");
   const navigate  = useNavigate();
-
+  const isAuthenticated = Auth();
   async function handleSubmit(){
     try{
-      const res=await axios.post("/user/login",{email,password});
+      const res=await axios.post("/user/login",{email,password} ,{withCredentials: true} );
+      console.log("LBABALBA")
+      console.log(res);
       if(res.status = 200){
         navigate('/');
       }
@@ -20,6 +23,13 @@ function Login() {
       alert("CREDENCIAIS INVALIDAS");
     }
   }
+
+   useEffect(() => {
+     if (isAuthenticated) {
+       alert("JA LOGADO");
+       navigate(`/`);
+     }
+   }, [isAuthenticated, navigate]);
 
   return (
     <div class="mainClass" >

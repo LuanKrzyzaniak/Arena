@@ -1,13 +1,20 @@
 const path = require('path')
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
+const cookieParser = require("cookie-parser");
 const express = require("express")
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-const app = express();
+const axios = require('axios');
+axios.defaults.withCredentials = true;
 
-app.use(cors());
+const app = express();
+app.use(cookieParser());
+app.use(cors({
+    origin: 'http://localhost:3000', 
+    credentials: true
+  }));
 app.use(bodyParser.json());
 
 const userRoutes = require("./routes/userRoutes");
