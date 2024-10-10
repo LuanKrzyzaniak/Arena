@@ -1,6 +1,6 @@
 .Home-welcome {
     margin-top: var(--navbar-height);
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("./welcomebg.png");
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../assets/welcomebg.png");
     background-size: 100% auto;
     background-repeat: no-repeat;
     height: 100%;
