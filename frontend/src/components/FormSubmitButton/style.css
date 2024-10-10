@@ -1,0 +1,8 @@
+.FormSubmitButton-btn {
+    width: 100%;
+    background-color: var(--primary-color);
+    border: none;
+    padding: .275rem 1rem;
+    color: #fff;
+    font-weight: bold;
+}

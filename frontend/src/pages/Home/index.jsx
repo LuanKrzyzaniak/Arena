@@ -1,14 +1,14 @@
 import React from "react";
-import "./index.css";
+import "./style.css";
 
-import logo from "./logo.png";
+import logo from "../../assets/logo_def.png";
 import lollogo from "./lollogo.png";
 import dotalogo from "./dotalogo.png";
 import cslogo from "./cslogo.png";
+
 import { Carousel } from "react-bootstrap";
 
 function Home() {
-
 	return (
 		<>
 			{/* Navbar */}
@@ -20,7 +20,7 @@ function Home() {
 				<h2>Escolha o jogo, <span id="username">undefined</span>:</h2>
 				<Carousel className="Home-carousel">
 					<Carousel.Item>
-						<img src={lollogo} alt="League of Legends logo"  />
+						<img src={lollogo} alt="League of Legends logo" />
 					</Carousel.Item>
 					<Carousel.Item>
 						<img src={dotalogo} alt="Dota 2 logo" />

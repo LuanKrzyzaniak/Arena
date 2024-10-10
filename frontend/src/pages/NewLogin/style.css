@@ -1,0 +1,60 @@
+.Login {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
+
+.Login-logo {
+    width: 100%;
+    padding: 0 4rem;
+}
+
+.Login-logo img {
+    width: 100%;
+    height: auto;
+}
+
+.Login-form {
+    width: 100%;
+}
+
+.Login-form form {
+    padding: 0 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.Login-form form .input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.Login-form form .input input {
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+}
+
+.Login-form form .input a {
+    font-size: 14px;
+    margin-top: 5px;
+    text-decoration: none;
+    color: #c4c4c4;
+}
+
+.Login-form form .Login-formBtn {
+    margin-top: 2rem;
+    width: 50%;
+    font-size: 1.25rem;
+}
