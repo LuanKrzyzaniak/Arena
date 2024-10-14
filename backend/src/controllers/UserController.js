@@ -40,7 +40,6 @@ async function store(req, res) {
 async function check(req,res) {
     try {
       const token = req.cookies.tokenuser;
-      console.log(token);
       if (token) {
         jwt.verify(token, "blablabla");
         res.status(200).json({ auth: true });
