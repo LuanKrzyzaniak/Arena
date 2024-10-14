@@ -10,14 +10,14 @@
 }
 
 .Login-logo {
-    width: 100%;
+    width: 80%;
     padding: 0 4rem;
 }
 
 .Login-logo img {
     width: 100%;
     height: auto;
-}
+}   
 
 .Login-form {
     width: 100%;
