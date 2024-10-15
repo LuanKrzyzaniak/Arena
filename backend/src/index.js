@@ -18,8 +18,11 @@ app.use(cors({
 app.use(bodyParser.json());
 
 const userRoutes = require("./routes/userRoutes");
+const tournamentRoutes = require("./routes/tournamentRoutes");
+
 
 app.use("/user", userRoutes);
+app.use("/tournament",tournamentRoutes);
 
 const port = process.env.API_PORT || 3332;
 
