@@ -34,9 +34,9 @@ CREATE TABLE if NOT EXISTS format(
     CONSTRAINT pk_format PRIMARY KEY (id)
 );
 
-INSERT INTO format(formatname) VALUES (1, 'Round Robin');
-INSERT INTO format(formatname) VALUES (2, 'Single Elimination');
-INSERT INTO format(formatname) VALUES (3, 'Double Elimination');
+INSERT INTO format(id,formatname) VALUES (1, 'Round Robin');
+INSERT INTO format(id,formatname) VALUES (2, 'Single Elimination');
+INSERT INTO format(id,formatname) VALUES (3, 'Double Elimination');
 
 -- TOURNAMENT ----------------------------------------
 CREATE TABLE if NOT EXISTS tournament(
