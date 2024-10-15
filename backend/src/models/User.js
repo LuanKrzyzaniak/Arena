@@ -10,7 +10,8 @@ class User {
         email,
         description,
         sports,
-        birthdate
+        birthdate,
+        verified
     ) {
         this.id = id;
         this.username = username;
@@ -20,6 +21,7 @@ class User {
         this.description = description;
         this.sports = sports;
         this.birthdate = birthdate;
+        this.verified = verified;
     }
 
     // Send new user to database
@@ -28,8 +30,8 @@ class User {
         const dbClient = await db.connect();
 
         await dbClient.query(
-            'INSERT INTO client (id, username, pass, email, birthdate) VALUES ($1, $2, $3, $4, $5)',
-            [this.id, this.username, this.password, this.email, this.birthdate]
+            'INSERT INTO client (id, username, pass, email, birthdate, verified) VALUES ($1, $2, $3, $4, $5, $6)',
+            [this.id, this.username, this.password, this.email, this.birthdate,this.verified]
         );
 
         dbClient.release();

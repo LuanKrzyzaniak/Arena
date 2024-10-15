@@ -18,7 +18,8 @@ async function store(req, res) {
     body.email,
     null,
     null,
-    body.birthdate
+    body.birthdate,
+    body.verified
   );
 
   try {
