@@ -24,7 +24,7 @@ function Register() {
       try {
         const res = await axios.post("/user/create", { email, username, birthdate, password });
         if (res.status === 201) {
-          navigate('/');
+          navigate('/login');
           alert("CRIADO")
         }
       } catch (error) {

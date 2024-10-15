@@ -8,6 +8,7 @@ import NewLogin from './pages/NewLogin';
 import ErrorPage from './pages/Error';
 import Home from './pages/Home';
 import RegisterPage from './pages/Register';
+import TournamentRegister from './pages/TournamentRegister';
 
 import "./index.css";
 import Login from './pages/Login/Login';
@@ -26,7 +27,11 @@ const router = createBrowserRouter([
   {
     path: '/register',
     element: <RegisterPage />
-  }
+  },
+  {
+    path: '/tournament/register',
+    element: <TournamentRegister />,
+  },
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
