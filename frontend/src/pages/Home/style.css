@@ -12,7 +12,7 @@
 }
 
 .Home-welcome h1 {
-    font-family: 'Rubik Dirt';
+    font-family: 'Rubik Dirt', sans-serif;
     text-align: center;
     color: #FFF;
     font-size: 2.25rem;
@@ -28,6 +28,9 @@
     background-color: #000;
     
     padding: 1rem 0rem;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .Home-selectgame h2 {
@@ -38,6 +41,28 @@
     color: #FFF;
 }
 
-.Home-carousel img{
-    height: 100px;
+.Home-selectgame span {
+    font-family: 'Rubik Dirt', sans-serif;
+}
+
+.Home-carousel {
+    margin-top: 2rem;
+
+    width: 100%;
+}
+
+.Home-carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Home-carousel-item img {
+    height: 75px;
+}
+
+.Home-selectgame button {
+    margin-top: 2rem;
+    width: 60%;
+    align-self: center;
 }

@@ -3,9 +3,13 @@ import "./style.css";
 
 import logo from "../../assets/logo_def.png";
 
-// import { Carousel } from "react-bootstrap";
+import lol_logo from "../../assets/league-of-legends-seeklogo.png"
+import dota_logo from "../../assets/dota-2-seeklogo.png"
+
+import { Carousel, CarouselItem } from "react-bootstrap";
 
 import Navbar from "../../components/Navbar";
+import FormSubmitButton from "../../components/FormSubmitButton";
 
 function Home() {
 	return (
@@ -19,17 +23,20 @@ function Home() {
 			</section>
 			<section className="Home-selectgame">
 				<h2>Escolha o jogo, <span id="username">undefined</span>:</h2>
-				{/* <Carousel className="Home-carousel">
-					<Carousel.Item>
-						<img src={lollogo} alt="League of Legends logo" />
-					</Carousel.Item>
-					<Carousel.Item>
-						<img src={dotalogo} alt="Dota 2 logo" />
-					</Carousel.Item>
-					<Carousel.Item>
-						<img src={cslogo} alt="Counter Strike logo" />
-					</Carousel.Item>
-				</Carousel> */}
+				<Carousel className="Home-carousel" interval={5000} indicators={false}>
+					<CarouselItem>
+						<div className="Home-carousel-item">
+							<img src={lol_logo} alt="" />
+						</div>
+					</CarouselItem>
+					<CarouselItem>
+						<div className="Home-carousel-item">
+							<img src={dota_logo} alt="" />
+						</div>
+					</CarouselItem>
+				</Carousel>
+
+				<FormSubmitButton content="Selecionar" />
 			</section>
 		</>
 	)
