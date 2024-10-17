@@ -19,7 +19,7 @@ async function store(req, res) {
     null,
     null,
     body.birthdate,
-    body.verified
+    true
   );
 
   try {
@@ -38,20 +38,20 @@ async function store(req, res) {
   }
 }
 
-async function check(req,res) {
-    try {
-      const token = req.cookies.tokenuser;
-      if (token) {
-        jwt.verify(token, "blablabla");
-        res.status(200).json({ auth: true });
-      } else {
-        res.status(401).json({ auth: false });
-      }
-    } catch (error) {
-      console.log(error)
+async function check(req, res) {
+  try {
+    const token = req.cookies.tokenuser;
+    if (token) {
+      jwt.verify(token, "blablabla");
+      res.status(200).json({ auth: true });
+    } else {
       res.status(401).json({ auth: false });
     }
+  } catch (error) {
+    console.log(error);
+    res.status(401).json({ auth: false });
   }
+}
 
 async function login(req, res) {
   // User.getById()
@@ -63,18 +63,19 @@ async function login(req, res) {
       req.body.password,
       req.body.email,
       null,
-      null,
-      null
+      true
     );
+
     const valid = await user.verifyLogin(user.email, user.password);
     if (valid) {
-      const token = jwt.sign({ user: User }, "blablabla", { expiresIn: 3600 });
+      console.log(user)
+      const token = jwt.sign({ user }, "blablabla", { expiresIn: 3600 });
       res.cookie("tokenuser", token, {
         maxAge: 900000,
         httpOnly: true,
         sameSite: "Lax",
       });
-      
+
       res.status(200);
       res.json({ message: "logou e gerou cookie " });
     } else {
@@ -151,8 +152,6 @@ async function remove(req, res) {
   } catch (error) {}
 }
 
-
-
 // Just an aux function
 async function generateId() {
   let exit = false;
@@ -168,4 +167,4 @@ async function generateId() {
   }
 }
 
-module.exports = { store, login, list, edit, remove ,check};
+module.exports = { store, login, list, edit, remove, check };

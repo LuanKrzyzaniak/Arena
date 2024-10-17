@@ -1,5 +1,6 @@
 const db = require("../database");
 
+
 async function getTournamentByName(req,res) {
     const dbClient = await db.connect();
     const tournamentName = req.body.tournamentname;
@@ -31,6 +32,22 @@ async function getAllTournament(req,res){
     }
 }
 
+async function getFormats(req,res){
+  const dbClient = await db.connect();
+  try{
+    const response = await db.query("SELECT DISTINCT format FROM tournament");
+    dbClient.release();
+    if(response.rowCount == 0){
+      return res.status(400).json({message: "No formats available"});
+    }else{
+      return res.json({data:response.rows}).status(200);
+    }
+  }catch(error){
+    console.log(error);
+    res.status(400).json({error});
+  }
+}
+
 
 async function getTournamentById(req, res) {
   const dbClient = await db.connect();
@@ -51,7 +68,7 @@ async function getTournamentById(req, res) {
   }
 }
 
-async function create(req, res) {
+async function create(req, res,) {
   const dbClient = await db.connect();
   const tournamentName = req.body.tournamentname;
   const joinDate = req.body.joindate;
@@ -67,7 +84,7 @@ async function create(req, res) {
     return res.status(200).json({message:"created"});
   } catch (error) {
     console.log(error);
-    return res.status(400).json({ error });
+    return res.status(400).json({ error});
   }
 }
 
@@ -90,4 +107,4 @@ async function deleteByName(req,res) {
     }
 }
 
-module.exports = { getTournamentById ,create ,deleteByName ,getAllTournament,getTournamentByName};
+module.exports = { getTournamentById ,create ,deleteByName ,getAllTournament, getTournamentByName, getFormats};

@@ -8,8 +8,6 @@ class User {
         displayname,
         password,
         email,
-        description,
-        sports,
         birthdate,
         verified
     ) {
@@ -18,8 +16,6 @@ class User {
         this.displayname = displayname;
         this.password = password;
         this.email = email;
-        this.description = description;
-        this.sports = sports;
         this.birthdate = birthdate;
         this.verified = verified;
     }
@@ -110,6 +106,7 @@ class User {
             user.birthdate
         );
     }
+
 
     async verifyLogin(email, password) {
         try {
