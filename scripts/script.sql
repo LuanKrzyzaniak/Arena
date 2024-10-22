@@ -25,7 +25,9 @@ CREATE TABLE if NOT EXISTS sport(
     sportname VARCHAR(255) NOT NULL 
 );
 
-INSERT INTO sport(sportname) VALUES ('LOL');
+INSERT INTO sport(sportname) VALUES ('League of Legends');
+INSERT INTO sport(sportname) VALUES ('DOTA 2');
+INSERT INTO sport(sportname) VALUES ('Counter-Strike 2');
 
 -- TOURNAMENT FORMATS ---------------------------------
 CREATE TABLE if NOT EXISTS format(
@@ -46,11 +48,13 @@ CREATE TABLE if NOT EXISTS tournament(
     tournamentdate DATE NOT NULL,
     prize REAL NOT NULL,
     format INTEGER NOT NULL,
+    sport INTEGER NOT NULL,
     capacity INTEGER NOT NULL,
     CONSTRAINT pk_tournament PRIMARY KEY (id),
-    CONSTRAINT fk_format FOREIGN KEY(format) REFERENCES format(id)
+    CONSTRAINT fk_format FOREIGN KEY(format) REFERENCES format(id),
+    CONSTRAINT fk_sport FOREIGN KEY(sport) REFERENCES sport(id)
 );
 
-INSERT INTO tournament(tournamentname, joindate, tournamentdate, prize, format, capacity) VALUES ('Tournament 1', '2024-12-10', '2024-12-12', 150.00, 2, 16);
-INSERT INTO tournament(tournamentname, joindate, tournamentdate, prize, format, capacity) VALUES ('Tournament 2', '2025-03-07', '2024-05-10', 6000.00, 3, 16);
-INSERT INTO tournament(tournamentname, joindate, tournamentdate, prize, format, capacity) VALUES ('Tournament 3', '2024-11-01', '2024-11-02', 0.00, 1, 4);
+INSERT INTO tournament(tournamentname, joindate, tournamentdate, prize, format, sport, capacity) VALUES ('Tournament 1', '2024-12-10', '2024-12-12', 150.00, 2, 1, 16);
+INSERT INTO tournament(tournamentname, joindate, tournamentdate, prize, format, sport, capacity) VALUES ('Tournament 2', '2025-03-07', '2024-05-10', 6000.00, 3, 2, 16);
+INSERT INTO tournament(tournamentname, joindate, tournamentdate, prize, format, sport, capacity) VALUES ('Tournament 3', '2024-11-01', '2024-11-02', 0.00, 1, 3, 4);
