@@ -4,15 +4,28 @@ import './style.css';
 
 import logo from '../../assets/logo_def.png';
 import FormSubmitButton from '../../components/FormSubmitButton';
+import axios from 'axios';
 
 function Login() {
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const response = await axios.post("/user/login",
+      { usename: e.target[0].value, password: e.target[1].value },
+      { withCredentials: true }
+    );
+
+    console.log(response);
+  }
+
   return (
     <div className='Login'>
       <section className="Login-logo">
         <img src={logo} alt="Arena logo" />
       </section>
       <section className="Login-form">
-        <form method='POST'>
+        <form method='POST' onSubmit={(e) => handleSubmit(e)}>
 
           <div className="input">
             <input type="text" name="" id="" placeholder='Nome de usuário' />

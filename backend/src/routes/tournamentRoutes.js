@@ -11,4 +11,6 @@ router.get("/id", TournamentController.getTournamentById);  //Get 1 tournament b
 router.post("/create",checkVerified,TournamentController.create); //Create a tournament
 router.delete("/remove",TournamentController.deleteByName); // Delete a tournament by name
 router.get("/formats",TournamentController.getFormats); // Get all formats
+router.get("/tournamentsports",TournamentController.getTournamentByName);//Get tournaments by sport
+router.get("/sports",TournamentController.getSports);//Get all sports
 module.exports = router;

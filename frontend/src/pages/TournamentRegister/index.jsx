@@ -96,7 +96,7 @@ function TournamentRegister() {
                 </select>
 
                 <label className="TR_text" for="format">FORMATO</label>
-                <select onChange={(e) => setFormat(e.currentTarget.value)} className="TR_input" id="format">
+
                     {
                     formatList.map((i) => {
                         console.log(i)
@@ -105,6 +105,8 @@ function TournamentRegister() {
                         )
                     })
                     }
+
+
                 </select>
             </div>
 
