@@ -89,6 +89,7 @@ function TournamentRegister() {
                     {
                         sportList.map((i) => {
                             return(
+                                
                                 <option value="i">{i.sportname}</option>
                             )
                         })
@@ -96,6 +97,7 @@ function TournamentRegister() {
                 </select>
 
                 <label className="TR_text" for="format">FORMATO</label>
+                <select onChange={(e) => setFormat(e.currentTarget.value)} className="TR_input" id="format">
 
                     {
                     formatList.map((i) => {
@@ -113,6 +115,7 @@ function TournamentRegister() {
             <div className="TR_div_button">
                 <button className="TR_button">CADASTRAR</button>
             </div>
+            
             </form>
         </div>
     )
