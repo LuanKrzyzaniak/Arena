@@ -68,6 +68,9 @@ function TournamentRegister() {
                 <select onChange={(e) => setFormat(e.currentTarget.value)} className="TR_input" id="format">
                     <option value="1">Round-Robin</option>
                     <option value="2">Single-Elimination</option>
+                    Format.map(() => {
+
+                    })
                 </select>
             </div>
 
