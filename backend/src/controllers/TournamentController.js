@@ -35,7 +35,7 @@ async function getAllTournament(req,res){
 async function getFormats(req,res){
   const dbClient = await db.connect();
   try{
-    const response = await db.query("SELECT DISTINCT format FROM tournament");
+    const response = await db.query("SELECT DISTINCT formatname from format");
     dbClient.release();
     if(response.rowCount == 0){
       return res.status(400).json({message: "No formats available"});

@@ -16,7 +16,10 @@ function TournamentRegister() {
     const [Capacity, setCapacity] = React.useState("");
     const [Format, setFormat] = React.useState("");
     const [Sport, setSport] = React.useState("");
+
+    const [formatList, setFormatList] = React.useState([]);
     const [sportList, setSportList] = React.useState([]);
+
 
     const navigate = useNavigate();
 
@@ -28,7 +31,12 @@ function TournamentRegister() {
         try {
             const res = await axios.get("/tournament/formats");
             const aux = res.data.data;
-            setSportList(aux);
+            setFormatList(aux);
+
+            const resSport = await axios.get("/tournament/sports");
+            const auxSport = resSport.data.data;
+            setSportList(auxSport);
+
         } catch (error) {
             
         }
@@ -78,17 +86,22 @@ function TournamentRegister() {
 
                 <label className="TR_text" for="sport">sport</label>
                 <select onChange={(e) => setSport(e.currentTarget.value)} className="TR_input" id="sport">
-                    <option value="1">League of Legends</option>
-                    <option value="2">Dota 2</option>
+                    {
+                        sportList.map((i) => {
+                            return(
+                                <option value="i">{i.sportname}</option>
+                            )
+                        })
+                    }
                 </select>
 
                 <label className="TR_text" for="format">FORMATO</label>
                 <select onChange={(e) => setFormat(e.currentTarget.value)} className="TR_input" id="format">
                     {
-                    sportList.map((i) => {
-                        console.log(i.format)
+                    formatList.map((i) => {
+                        console.log(i)
                         return(
-                            <option value="i">{i.format}</option>
+                            <option value="i">{i.formatname}</option>
                         )
                     })
                     }
