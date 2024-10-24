@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.css";
 
 import logo from "../../assets/logo_def.png";
@@ -12,6 +12,11 @@ import Navbar from "../../components/Navbar";
 import FormSubmitButton from "../../components/FormSubmitButton";
 
 function Home() {
+
+	useEffect(() => {
+		
+	}, [])
+
 	return (
 		<>
 			<section className="Home-navbar">
