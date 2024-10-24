@@ -1,170 +1,97 @@
-const User = require("../models/User");
-const bcrypt = require("bcrypt");
-const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
+const pool = require("../database")
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
 
-async function store(req, res) {
-  const { body } = req;
+async function create(req, res) {
+  const database = await pool.connect()
+  const { body } = req
 
-  body.password = await bcrypt.hash(body.password, 10);
+  // check email and username
+  let response = await database.query("SELECT id FROM client WHERE email=$1 or username=$2", [body.email, body.username])
+  database.release()
+  if (response.rowCount !== 0) {
+    return res.json({
+      operation: "Failed",
+      error: "Email or username already exists"
+    })
+  }
 
-  body.id = await generateId();
+  database = await pool.connect();
 
-  let user = new User(
-    body.id,
+  const hashedPassword = await bcrypt.hash(body.password, parseInt(process.env.PASSWORD_SALT))
+
+  // generate user id
+  let userId = 0
+  let uniqueId = false
+  while (uniqueId === false) {
+    userId = parseInt(Math.random() * 1000000)
+    response = await database.query("SELECT id FROM client WHERE id=$1", [userId])
+    if (response.rowCount === 0)
+      uniqueId = true
+  }
+
+  response = await database.query("INSERT INTO client (id, username, pass, email, birthdate, verified) VALUES ($1, $2, $3, $4, $5, $6)", [
+    userId,
     body.username,
-    null,
-    body.password,
+    hashedPassword,
     body.email,
-    null,
-    null,
     body.birthdate,
-    true
-  );
+    false
+  ])
 
-  try {
-    let createdUser = await user.save();
-
-    return res.status(201).json({
-      statusCode: 201,
-      user: createdUser,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      statusCode: 400,
-      errorDetail: error.detail,
-      errorTable: error.table,
-    });
-  }
-}
-
-async function check(req, res) {
-  try {
-    const token = req.cookies.tokenuser;
-    if (token) {
-      jwt.verify(token, "blablabla");
-      res.status(200).json({ auth: true });
-    } else {
-      res.status(401).json({ auth: false });
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(401).json({ auth: false });
-  }
+  return res.json({
+    operation: "Succeed"
+  })
 }
 
 async function login(req, res) {
-  // User.getById()
-  try {
-    let user = new User(
-      null,
-      null,
-      null,
-      req.body.password,
-      req.body.email,
-      null,
-      true
-    );
+  const database = await pool.connect()
 
-    const valid = await user.verifyLogin(user.email, user.password);
-    if (valid) {
-      console.log(user)
-      const token = jwt.sign({ user }, "blablabla", { expiresIn: 3600 });
-      res.cookie("tokenuser", token, {
-        maxAge: 900000,
-        httpOnly: true,
-        sameSite: "Lax",
-      });
+  const { mode, entry, password } = req.body
 
-      res.status(200);
-      res.json({ message: "logou e gerou cookie " });
-    } else {
-      res.status(500);
-      res.json({ message: "invalido" });
-    }
-  } catch (error) {
-    res.status(500);
-    res.json({ message: "invalido" + error });
+  const response = await database.query("SELECT id, pass, verified FROM client WHERE " + mode + "=$1", [entry])
+  database.release()
+
+  if(response.rowCount === 0)
+    return res.json({
+      operation: "Failed",
+      error: mode + "not found"
+    })
+
+  const pass = response.rows[0].pass
+
+  if(!await bcrypt.compare(password, pass))
+  {
+    return res.json({
+      operation: "Failed",
+      error: "Incorrect password"
+    })
   }
+
+  const token = jwt.sign({ id: response.rows[0].id, verified: response.rows[0].verified }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_TTL
+  })
+
+  return res.json({
+    operation: "Succeed",
+    token
+  })
 }
 
-// User profile will be retrieved using its id
-async function list(req, res) {
-  const { id } = req.params;
+async function verify(req, res) {
 
-  try {
-    const user = await User.getById(id);
-    if (user == null) throw { detail: `User ${id} not found`, table: "client" };
+}
 
-    return res.status(200).json(user);
-  } catch (error) {
-    return res.status(404).json({
-      statusCode: 404,
-      errorDetail: error.detail,
-      errorTable: error.table,
-    });
-  }
+async function get(req, res) {
+
 }
 
 async function edit(req, res) {
-  const { updateArrayInfo } = req.body;
-  const { id } = req;
 
-  let user = new User(
-    //id,
-    725962,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null,
-    null
-  );
-
-  try {
-    await user.update(updateArrayInfo);
-
-    return res.status(200).json({
-      statusCode: 200,
-      description: "User updated",
-    });
-  } catch (error) {
-    return res.status(400).json({
-      statusCode: 400,
-      errorDetail: error.detail,
-      errorTable: error.table,
-    });
-  }
 }
 
 async function remove(req, res) {
-  try {
-    let user = new User(req.body.id, null, null, null, null, null, null, null);
-    const remove = await user.deleteById(user.id);
-    if (remove) {
-      res.status(200);
-      res.json({ message: `user id: ${user.id} deleted` });
-    } else {
-      res.status(500);
-      res.json({ message: `user id: ${user.id} not found` });
-    }
-  } catch (error) {}
+
 }
 
-// Just an aux function
-async function generateId() {
-  let exit = false;
-
-  while (exit == false) {
-    id = Math.floor(100000 + Math.random() * 900000);
-
-    const userWithId = await User.getById(id);
-    if (userWithId == null) {
-      exit = true;
-      return id;
-    }
-  }
-}
-
-module.exports = { store, login, list, edit, remove, check };
+module.exports = { create, login, verify, get, edit, remove }
