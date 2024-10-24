@@ -61,7 +61,10 @@ function TournamentRegister() {
         <div className="TR_div_main">
             <Navbar></Navbar>
             <h1 className="TR_title">CADASTRO DE TORNEIO</h1>
-            <form method="post" onSubmit={submitTournament}>
+            <form method="post" onSubmit={(e)=>{
+                e.preventDefault();
+                submitTournament();
+            }}>
                 
             <div className="TR_div_form">
                 <label className="TR_text" for="name">NOME</label>
@@ -91,7 +94,7 @@ function TournamentRegister() {
                         sportList.map((i) => {
                             return(
                                 
-                                <option value="i">{i.sportname}</option>
+                                <option value={i.id}>{i.sportname}</option>
                             )
                         })
                     }
@@ -104,7 +107,7 @@ function TournamentRegister() {
                     formatList.map((i) => {
                         console.log(i)
                         return(
-                            <option value="i">{i.formatname}</option>
+                            <option value={i.id}>{i.formatname}</option>
                         )
                     })
                     }

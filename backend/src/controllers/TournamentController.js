@@ -38,7 +38,7 @@ async function getFormats(req, res) {
   const dbClient = await db.connect();
 
   try{
-    const response = await db.query("SELECT DISTINCT formatname from format");
+    const response = await db.query("SELECT DISTINCT * from format");
 
     dbClient.release();
     if (response.rowCount == 0) {
@@ -104,7 +104,7 @@ async function create(req, res) {
   const sport = req.body.sport;
   try {
     const response = await db.query(
-      "INSERT INTO tournament(tournamentname, joindate, tournamentdate, prize, format, capacity,sport) VALUES ($1,$2,$3,$4,$5,$6,%7);",
+      "INSERT INTO tournament(tournamentname, joindate, tournamentdate, prize, format, capacity,sport) VALUES ($1,$2,$3,$4,$5,$6,$7);",
       [tournamentName, joinDate, tournamentDate, prize, format, capacity, sport]
     );
     return res.status(200).json({ message: "created" });
@@ -136,7 +136,7 @@ async function deleteByName(req, res) {
 async function getSports(req, res) {
   const dbClient = await db.connect();
   try {
-    const response = await db.query("SELECT sportname FROM sport");
+    const response = await db.query("SELECT * FROM sport");
 
     if(response.rowCount > 0){
       return res.status(200).json({message:"FOUND",data:response});
