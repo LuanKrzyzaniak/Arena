@@ -35,7 +35,8 @@ function TournamentRegister() {
 
             const resSport = await axios.get("/tournament/sports");
             const auxSport = resSport.data.data;
-            setSportList(auxSport);
+            console.log(auxSport.rows)
+            setSportList(auxSport.rows);
 
         } catch (error) {
             

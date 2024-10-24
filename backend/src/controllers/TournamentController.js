@@ -136,7 +136,7 @@ async function deleteByName(req, res) {
 async function getSports(req, res) {
   const dbClient = await db.connect();
   try {
-    const response = await db.query("SELECT * FROM sports");
+    const response = await db.query("SELECT sportname FROM sport");
 
     if(response.rowCount > 0){
       return res.status(200).json({message:"FOUND",data:response});
