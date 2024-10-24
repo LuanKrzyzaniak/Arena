@@ -3,8 +3,8 @@ import Navbar from "../../components/Navbar";
 
 import axios from '../../axiosConfig'
 
-import React, {useState} from "react";
-import { useNavigate} from "react-router-dom";
+import React, {useState,useEffect} from "react";
+import { useNavigate} from "react-router-dom";  
 
 function TournamentRegister() {
 
@@ -15,18 +15,38 @@ function TournamentRegister() {
     const [Prize, setPrize] = React.useState("");
     const [Capacity, setCapacity] = React.useState("");
     const [Format, setFormat] = React.useState("");
+    const [Sport, setSport] = React.useState("");
+
+    const [formatList, setFormatList] = React.useState([]);
+    const [sportList, setSportList] = React.useState([]);
+
 
     const navigate = useNavigate();
 
-    async function getFormat(){
+    useEffect(()=>{
+        getFormat();
+    },[])
 
+    async function getFormat(){
+        try {
+            const res = await axios.get("/tournament/formats");
+            const aux = res.data.data;
+            setFormatList(aux);
+
+            const resSport = await axios.get("/tournament/sports");
+            const auxSport = resSport.data.data;
+            setSportList(auxSport);
+
+        } catch (error) {
+            
+        }
     }
 
     async function submitTournament() {
         // TRATAR FORMATO
         try {
             const res = await axios.post("/tournament/create", {Name, JoinDate, TournamentDate, Prize, Format, Capacity});
-            if(res.status == 200){
+            if(res.status === 200){
                 navigate("/");
                 alert("TOURNAMENT CREATED");
             }
@@ -64,13 +84,29 @@ function TournamentRegister() {
                 <label className="TR_text" for="capacity">CAPACIDADE</label>
                 <input onChange={(e) => setCapacity(e.currentTarget.value)} className="TR_input" id="capacity"></input>
 
-                <label className="TR_text" for="format">FORMATO</label>
-                <select onChange={(e) => setFormat(e.currentTarget.value)} className="TR_input" id="format">
-                    <option value="1">Round-Robin</option>
-                    <option value="2">Single-Elimination</option>
-                    Format.map(() => {
+                <label className="TR_text" for="sport">sport</label>
+                <select onChange={(e) => setSport(e.currentTarget.value)} className="TR_input" id="sport">
+                    {
+                        sportList.map((i) => {
+                            return(
+                                <option value="i">{i.sportname}</option>
+                            )
+                        })
+                    }
+                </select>
 
+                <label className="TR_text" for="format">FORMATO</label>
+
+                    {
+                    formatList.map((i) => {
+                        console.log(i)
+                        return(
+                            <option value="i">{i.formatname}</option>
+                        )
                     })
+                    }
+
+
                 </select>
             </div>
 
