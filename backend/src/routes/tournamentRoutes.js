@@ -12,5 +12,6 @@ router.post("/create",TournamentController.create); //Create a tournament
 router.delete("/remove",TournamentController.deleteByName); // Delete a tournament by name
 router.get("/formats",TournamentController.getFormats); // Get all formats
 router.get("/tournamentsports",TournamentController.getTournamentByName);//Get tournaments by sport
-router.get("/sports",TournamentController.getSports);//Get all sports
+router.get("/sports",TournamentController.getSports);//Get all sports;
+router.get("/random/:id",TournamentController.random);//Randomize
 module.exports = router;

@@ -35,7 +35,6 @@ function TournamentRegister() {
 
             const resSport = await axios.get("/tournament/sports");
             const auxSport = resSport.data.data;
-            console.log(auxSport.rows)
             setSportList(auxSport.rows);
 
         } catch (error) {
@@ -44,9 +43,9 @@ function TournamentRegister() {
     }
 
     async function submitTournament() {
-        // TRATAR FORMATO
+
         try {
-            const res = await axios.post("/tournament/create", {Name, JoinDate, TournamentDate, Prize, Format, Capacity});
+            const res = await axios.post("/tournament/create", {Name, JoinDate, TournamentDate, Prize, Format, Capacity,Sport});
             if(res.status === 200){
                 navigate("/");
                 alert("TOURNAMENT CREATED");
@@ -89,25 +88,25 @@ function TournamentRegister() {
                 <input onChange={(e) => setCapacity(e.currentTarget.value)} className="TR_input" id="capacity"></input>
 
                 <label className="TR_text" for="sport">sport</label>
-                <select onChange={(e) => setSport(e.currentTarget.value)} className="TR_input" id="sport">
+                <select  onChange={(e) => setSport(e.target.value)} className="TR_input" id="sport">
+                    <option value={""}>SELECIONE UM E-SPORTE</option>
                     {
                         sportList.map((i) => {
                             return(
                                 
-                                <option value={i.id}>{i.sportname}</option>
+                                <option key={i.id}value={i.id}>{i.sportname}</option>
                             )
                         })
                     }
                 </select>
 
                 <label className="TR_text" for="format">FORMATO</label>
-                <select onChange={(e) => setFormat(e.currentTarget.value)} className="TR_input" id="format">
-
+                <select  onChange={(e) => setFormat(e.target.value)} className="TR_input" id="format">
+                    <option value={""}>SELECIONE UM FORMATO</option>
                     {
                     formatList.map((i) => {
-                        console.log(i)
                         return(
-                            <option value={i.id}>{i.formatname}</option>
+                            <option key={i.id} value={i.id}>{i.formatname}</option>
                         )
                     })
                     }

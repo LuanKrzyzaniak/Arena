@@ -1,5 +1,4 @@
 const db = require("../database");
-
 async function getTournamentByName(req, res) {
   const dbClient = await db.connect();
   const tournamentName = req.body.tournamentname;
@@ -37,7 +36,7 @@ async function getAllTournament(req, res) {
 async function getFormats(req, res) {
   const dbClient = await db.connect();
 
-  try{
+  try {
     const response = await db.query("SELECT DISTINCT * from format");
 
     dbClient.release();
@@ -95,13 +94,14 @@ async function getTournamentBySport(req, res) {
 
 async function create(req, res) {
   const dbClient = await db.connect();
-  const tournamentName = req.body.tournamentname;
-  const joinDate = req.body.joindate;
-  const tournamentDate = req.body.tournamentdate;
-  const prize = req.body.prize;
-  const format = req.body.format;
-  const capacity = req.body.capacity;
-  const sport = req.body.sport;
+  const tournamentName = req.body.Name;
+  const joinDate = req.body.JoinDate;
+  const tournamentDate = req.body.TournamentDate;
+  const prize = req.body.Prize;
+  const format = req.body.Format;
+  const capacity = req.body.Capacity;
+  const sport = req.body.Sport;
+
   try {
     const response = await db.query(
       "INSERT INTO tournament(tournamentname, joindate, tournamentdate, prize, format, capacity,sport) VALUES ($1,$2,$3,$4,$5,$6,$7);",
@@ -138,14 +138,42 @@ async function getSports(req, res) {
   try {
     const response = await db.query("SELECT * FROM sport");
 
-    if(response.rowCount > 0){
-      return res.status(200).json({message:"FOUND",data:response});
-    }else{
-      return res.status(400).json({message: "no sports found"});
+    if (response.rowCount > 0) {
+      return res.status(200).json({ message: "FOUND", data: response });
+    } else {
+      return res.status(400).json({ message: "no sports found" });
     }
   } catch (error) {
     console.log(error);
-    return res.status(400).json({error});
+    return res.status(400).json({ error });
+  }
+}
+
+const crypto = require("crypto");
+
+async function random(req, res) {
+  const dbClient = await db.connect();
+  const id = req.params.id;
+  console.log(id);
+  try {
+    const aux = await db.query(
+      "SELECT te.teamname FROM team te JOIN participants p ON te.id = p.teamid JOIN tournament t ON p.tournamentid = t.id WHERE t.id = $1;",[id]
+    );
+    const teams = aux.rows.map((row) => row.teamname);
+
+    const sortedTeams = teams.sort((a, b) => {
+      const hashA = crypto.createHash("sha256").update(a).digest("hex");
+      const hashB = crypto.createHash("sha256").update(b).digest("hex");
+      return hashA.localeCompare(hashB);
+    });
+
+    console.log(sortedTeams);
+    return res.status(200).json({ teams: sortedTeams });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ error });
+  } finally {
+    dbClient.release();
   }
 }
 
@@ -157,5 +185,6 @@ module.exports = {
   getTournamentByName,
   getFormats,
   getTournamentBySport,
-  getSports
+  getSports,
+  random,
 };

@@ -12,6 +12,7 @@ import TournamentRegister from './pages/TournamentRegister';
 
 import "./index.css";
 import Login from './pages/Login/Login';
+import Tournament from './Tournament/Tournament';
 
 
 const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
     path: '/tournament/register',
     element: <TournamentRegister />,
   },
+  {
+    path: '/tournament/:id',
+    element:<Tournament/>
+  }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

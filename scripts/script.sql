@@ -43,7 +43,7 @@ INSERT INTO format(formatname) VALUES ('Double Elimination');
 
 -- TOURNAMENT ----------------------------------------
 CREATE TABLE if NOT EXISTS tournament(
-    id INT NOT NULL,
+    id SERIAL,
     tournamentname  VARCHAR(255) NOT NULL UNIQUE,
     joindate DATE NOT NULL,
     tournamentdate DATE NOT NULL,
@@ -56,6 +56,65 @@ CREATE TABLE if NOT EXISTS tournament(
     CONSTRAINT fk_sport FOREIGN KEY(sport) REFERENCES sport(id)
 );
 
-INSERT INTO tournament(id, tournamentname, joindate, tournamentdate, prize, format, sport, capacity) VALUES (1, 'Tournament 1', '2024-12-10', '2024-12-12', 150.00, 2, 1, 16);
-INSERT INTO tournament(id, tournamentname, joindate, tournamentdate, prize, format, sport, capacity) VALUES (2, 'Tournament 2', '2025-03-07', '2024-05-10', 6000.00, 3, 2, 16);
-INSERT INTO tournament(id, tournamentname, joindate, tournamentdate, prize, format, sport, capacity) VALUES (3, 'Tournament 3', '2024-11-01', '2024-11-02', 0.00, 1, 3, 4);
+INSERT INTO tournament(tournamentname, joindate, tournamentdate, prize, format, sport, capacity) VALUES ( 'Tournament 1', '2024-12-10', '2024-12-12', 150.00, 2, 1, 16);
+INSERT INTO tournament(tournamentname, joindate, tournamentdate, prize, format, sport, capacity) VALUES ( 'Tournament 2', '2025-03-07', '2024-05-10', 6000.00, 3, 2, 16);
+INSERT INTO tournament(tournamentname, joindate, tournamentdate, prize, format, sport, capacity) VALUES ( 'Tournament 3', '2024-11-01', '2024-11-02', 0.00, 1, 3, 4);
+
+-- ORGS ----
+
+
+CREATE TABLE if NOT EXISTS organization(
+    id SERIAL,
+    orgname VARCHAR(50) NOT NULL,
+    descr VARCHAR(255),
+    own INTEGER NOT NULL,
+    CONSTRAINT pk_organization PRIMARY KEY (id),
+    CONSTRAINT fk_client FOREIGN KEY(own) REFERENCES client(id)
+);
+
+INSERT INTO organization(orgname,descr,own) VALUES ('OS GURI','EXEMPLO DE ORG',12345);
+
+-- TEAM -----
+
+
+CREATE TABLE if NOT EXISTS team(
+    id SERIAL,
+    orgid INTEGER NOT NULL,
+    sportid INTEGER NOT NULL,
+    teamname VARCHAR(50) NOT NULL,
+    descr VARCHAR(255),
+    CONSTRAINT pk_team PRIMARY KEY (id),
+    CONSTRAINT fk_org FOREIGN KEY(orgid) REFERENCES organization(id),
+    CONSTRAINT fk_sport FOREIGN KEY(sportid) REFERENCES sport(id)
+);
+
+INSERT INTO team (orgid,sportid,teamname,descr) VALUES (1,1,'OS GURI DO LOL','HAHAHAHA');
+INSERT INTO team (orgid,sportid,teamname,descr) VALUES (1,1,'OS GURI DO LOL2','HAHAHAHA');
+INSERT INTO team (orgid,sportid,teamname,descr) VALUES (1,1,'OS GURI DO LOL3','HAHAHAHA');
+INSERT INTO team (orgid,sportid,teamname,descr) VALUES (1,1,'OS GURI DO LOL4','HAHAHAHA');
+INSERT INTO team (orgid,sportid,teamname,descr) VALUES (1,1,'OS GURI DO LOL5','HAHAHAHA');
+INSERT INTO team (orgid,sportid,teamname,descr) VALUES (1,1,'OS GURI DO LOL6','HAHAHAHA');
+
+
+-- player ----
+
+CREATE TABLE if NOT EXISTS player (
+    teamid INTEGER NOT NULL,
+
+);
+
+-- Participants ------
+
+CREATE TABLE if NOT EXISTS participants(
+    tournamentid INTEGER NOT NULL,
+    teamid INTEGER NOT NULL,
+    CONSTRAINT fk_tournament FOREIGN KEY(tournamentid) REFERENCES tournament(id),
+    CONSTRAINT fk_team FOREIGN KEY(teamid) REFERENCES team(id)
+);
+
+INSERT INTO participants VALUES(1,1);
+INSERT INTO participants VALUES(1,2);
+INSERT INTO participants VALUES(1,3);
+INSERT INTO participants VALUES(1,4);
+INSERT INTO participants VALUES(1,5);
+INSERT INTO participants VALUES(1,6);
