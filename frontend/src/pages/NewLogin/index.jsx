@@ -4,14 +4,14 @@ import './style.css';
 
 import logo from '../../assets/logo_def.png';
 import FormSubmitButton from '../../components/FormSubmitButton';
-import axios from 'axios';
+import axios from "../../axiosConfig";
 
 function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const response = await axios.post("/user/login",
+    const response = await axios.post("/player/login",
       { usename: e.target[0].value, password: e.target[1].value },
       { withCredentials: true }
     );

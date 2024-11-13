@@ -6,28 +6,29 @@ import logo from "../../assets/logo.png";
 import Auth from "../../components/Auth/Auth";
 
 function Login() {
-  const [email, setEmail] = React.useState("");
+  const [login, setLogin] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const isAuthenticated = Auth();
+  // // const isAuthenticated = Auth();
   const navigate = useNavigate();
 
 
-  useEffect(() => {
-    if(isAuthenticated){
-      alert("JA AUTENTICADO")
-      navigate('/');
-    }
-  }, [,isAuthenticated,navigate]);
+  // useEffect(() => {
+  //   if(isAuthenticated){
+  //     alert("JA AUTENTICADO")
+  //     navigate('/');
+  //   }
+  // }, [,isAuthenticated,navigate]);
 
 
   async function handleSubmit() {
     try {
+      const infoType = "email";
       const res = await axios.post(
-        "/user/login",
-        { email, password },
-        { withCredentials: true }
+        "/player/login",
+        { login, password ,infoType},
       );
-      if (res.status == 200) {
+      if (res.data.statusCode == 111) {
+        console.log("LOGADO");
         navigate("/");
       }
     } catch (error) {
@@ -46,7 +47,7 @@ function Login() {
         <input
           class="inputs"
           type="text"
-          onChange={(e) => setEmail(e.currentTarget.value)}
+          onChange={(e) => setLogin(e.currentTarget.value)}
           placeholder="Email"
         ></input>
         <input

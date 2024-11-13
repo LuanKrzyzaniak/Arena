@@ -1,29 +1,25 @@
 const path = require('path')
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
-const cookieParser = require("cookie-parser");
 const express = require("express")
-const cors = require("cors");
-const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser")
+const cors = require("cors")
 
-const axios = require('axios');
-axios.defaults.withCredentials = true;
+const app = express()
 
-const app = express();
-app.use(cookieParser());
-app.use(cors({
-    origin: 'http://localhost:3000', 
-    credentials: true
-  }));
-app.use(bodyParser.json());
+const port = process.env.API_PORT
 
-const userRoutes = require("./routes/userRoutes");
-const tournamentRoutes = require("./routes/tournamentRoutes");
+app.use(cors())
+app.use(express.json())
+app.use(cookieParser())
 
+const userMiddleware = require("./middlewares/playerMiddleware")
+const playerRoutes = require("./routes/playerRoutes")
+const organizationRoutes = require("./routes/organizationRoutes")
+const tournamentRoutes = require("./routes/tournamentRoutes")
 
-app.use("/user", userRoutes);
-app.use("/tournament",tournamentRoutes);
+app.use("/player", playerRoutes)
+app.use("/organization", userMiddleware.isLogged, organizationRoutes)
+app.use("/tournament", userMiddleware.isLogged, tournamentRoutes)
 
-const port = process.env.API_PORT || 3332;
-
-app.listen(port, console.log(`Server running on port: ${port}`));
+app.listen(port, console.log(`Server running on port ${port}`))

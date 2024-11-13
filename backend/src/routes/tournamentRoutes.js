@@ -1,17 +1,18 @@
-const { Router } = require("express");
-const {checkVerified} = require("../middlewares/middlewares")
-const router = Router();
+const { Router } = require("express")
 
-const TournamentController = require("../controllers/TournamentController");
+const router = Router()
 
+const tournamentController = require("../controllers/tournamentController")
 
-router.get("/",TournamentController.getAllTournament);//Get all tournaments for cards
-router.get("/name",TournamentController.getTournamentByName);
-router.get("/id", TournamentController.getTournamentById);  //Get 1 tournament by id
-router.post("/create",TournamentController.create); //Create a tournament
-router.delete("/remove",TournamentController.deleteByName); // Delete a tournament by name
-router.get("/formats",TournamentController.getFormats); // Get all formats
-router.get("/tournamentsports",TournamentController.getTournamentByName);//Get tournaments by sport
-router.get("/sports",TournamentController.getSports);//Get all sports;
-router.get("/random/:id",TournamentController.random);//Randomize
-module.exports = router;
+const { isOwner } = require("../middlewares/tournamentMiddleware")
+const { isOwner : organizationIsOwner } = require("../middlewares/organizationMiddleware")
+
+router.post("/create/:oid", organizationIsOwner, tournamentController.create)
+router.get("/all", tournamentController.getAll)
+router.get("/:tid", tournamentController.get)
+router.delete("/:tid", isOwner, tournamentController.remove)
+
+router.post("/:tid/addOrg/:oid", tournamentController.addOrg)
+router.delete("/:tid/removeOrg/:oid", tournamentController.removeOrg)
+
+module.exports = router

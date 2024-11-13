@@ -22,8 +22,8 @@ function Register() {
     if (password === confirm) {
       const birthdate = `${year}-${month}-${day}`;
       try {
-        const res = await axios.post("/user/create", { email, username, birthdate, password });
-        if (res.status === 201) {
+        const res = await axios.post("/player/create", { username, email, password });
+        if (res.data.statusCode === 333) {
           navigate('/login');
           alert("CRIADO")
         }
