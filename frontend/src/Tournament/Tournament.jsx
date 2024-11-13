@@ -39,7 +39,6 @@ function Tournament() {
 
   return (
     <>
-    <Navbar/>
     <div className="container">
       
       {teams.length > 0 ? (
