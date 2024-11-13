@@ -1,3 +1,7 @@
+body{
+    height: 100vh;
+}
+
 .R_main{
     background-color: #202020;
     display: flex;
@@ -115,4 +119,76 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+/* DESKTOP */
+
+.org_register{
+    display: flex;
+    /* border: 1px solid blue; */
+}
+
+.title{
+    /* border: 1px solid red; */
+    background-color: #121111;    
+    height: 8em;
+    position: relative;
+    top: 0;
+}
+
+
+.sub_main_pc{
+    /* border: 1px solid orange; */
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    height: 100vh;
+    width: 100%;
+    background-image: url('../../assets/bg_register.png');
+}
+
+.org_text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    
+}
+
+.infos_right{
+    background-color: #000;
+    height: 20em;
+    width: 50em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cols_register{
+    display: flex;
+    flex-direction: column;
+}
+
+.cols_item{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+#col_register_left{
+    margin-right: 4em;
+}
+
+.label_register{
+    color: #fff;
+}
+
+.inputs_register{
+    background-color: #2d2d2d;
+    color: #fff;
+    border-radius: 3px;
+    border: none;
+    width: 16em;
+    margin-top: .5em;
 }

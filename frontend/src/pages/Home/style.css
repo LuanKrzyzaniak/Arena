@@ -66,3 +66,99 @@
     width: 60%;
     align-self: center;
 }
+
+/* DESKTOP */
+
+.homePC{
+    display: flex;
+    height: 100vh;
+    /* background-color: beige; */
+}
+
+.carousels{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar_home{
+    background-color:#121111;
+    width: 25%;
+}
+
+.logo_home{
+    margin-left: 2.5em;
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+
+.logo_home img{
+    width: 15em;
+}
+
+a{
+    text-decoration: none;
+}
+
+.text_nav {
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+}
+
+.line_sidebar_home{
+    border: 1px solid #424242;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+
+}
+
+.bold_text{
+    font-weight: bold;
+}
+
+.content_right{
+    width: 100%;
+}
+
+
+.carrousel img{
+    height: 18em;
+    width: 100%;
+}
+
+.item_carr img{
+    height: 5em;
+    width: 100%;
+}
+
+.item_carr{
+    width: 5em;
+    background-color: #121111;
+}
+
+.carr_games{
+    text-align: center;
+    display: flex;
+}
+
+.game_card{
+    background-color: #121111;
+    width: 20em;
+    height: 10em;
+    padding: 15px 15px 15px 15px;
+    margin-left: 6em;
+}
+
+.game_card img{
+    width: 18em;
+    height: 7em;
+}
+
+.car_below{
+    margin-top: 4em;
+}
+.item_car{
+    display: flex;
+}

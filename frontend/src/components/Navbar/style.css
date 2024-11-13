@@ -107,3 +107,47 @@
 a{
     text-decoration: none;
 }
+
+
+/* DESKTOP */
+
+
+.homePC{
+    display: flex;
+    height: 100vh;
+    /* background-color: beige; */
+}
+
+.navbar_home{
+    background-color:#121111;
+    width: 25%;
+}
+
+.logo_home{
+    margin-left: 2.5em;
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+
+.logo_home img{
+    width: 15em;
+    margin-right: 2em;
+}
+
+a{
+    text-decoration: none;
+}
+
+.text_nav {
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+}
+
+.line_sidebar_home{
+    border: 1px solid #424242;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+
+}
