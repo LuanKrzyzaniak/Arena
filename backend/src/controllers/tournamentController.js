@@ -1,4 +1,5 @@
 const db = require("../database")
+const crypto = require('crypto');
 
 async function create(req, res) {
     const pool = await db.connect()
@@ -163,11 +164,44 @@ async function removeOrg(req, res) {
     res.json({ msg: "Organization removed from tournament", statusCode: 999 })
 }
 
+async function random(req, res) {
+    const dbClient = await db.connect();
+    const id = req.params.id;
+
+    try {
+        const aux = await dbClient.query(
+            `SELECT o.name AS organization_name
+             FROM organizations o
+             JOIN tournament_competitors tc ON o.oid = tc.oid
+             JOIN tournaments t ON tc.tid = t.tid
+             WHERE t.tid = $1;`, [id]
+        );
+
+        const teams = aux.rows.map((row) => row.organization_name);
+
+        const sortedTeams = teams.sort((a, b) => {
+            const hashA = crypto.createHash("sha256").update(a).digest("hex");
+            const hashB = crypto.createHash("sha256").update(b).digest("hex");
+            return hashA.localeCompare(hashB);
+        });
+
+        console.log(sortedTeams);
+        return res.status(200).json({ teams: sortedTeams });
+    } catch (error) {
+        console.error(error);
+        return res.status(400).json({ error: error.message });
+    } finally {
+        dbClient.release();
+    }
+}
+
+
 module.exports = {
     create,
     get,
     getAll,
     remove,
     addOrg,
-    removeOrg
+    removeOrg,
+    random
 }

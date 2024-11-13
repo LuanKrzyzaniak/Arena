@@ -62,3 +62,16 @@ CREATE TABLE tournament_competitors (
     CONSTRAINT fk_tournament_competitors_tournaments FOREIGN KEY (tid) REFERENCES tournaments (tid),
     CONSTRAINT fk_tournament_competitors_organizations FOREIGN KEY (oid) REFERENCES organizations (oid)
 );
+
+INSERT INTO players (pid, username, email, password)
+VALUES (1, 'player1', 'player1@example.com', 'hashed_password');
+INSERT INTO organizations (oid, name, owner)
+VALUES (1, 'Org1', 1);
+INSERT INTO sports (sid, name)
+VALUES (1, 'Soccer');
+INSERT INTO org_sports (oid, sid)
+VALUES (1, 1);
+INSERT INTO tournaments (tid, name, owner, startDate, sport)
+VALUES (1, 'Tournament1', 1, '2024-11-13 10:00:00', 1);
+INSERT INTO tournament_competitors (tid, oid)
+VALUES (1, 1);

@@ -14,5 +14,6 @@ router.delete("/:tid", isOwner, tournamentController.remove)
 
 router.post("/:tid/addOrg/:oid", tournamentController.addOrg)
 router.delete("/:tid/removeOrg/:oid", tournamentController.removeOrg)
+router.get("/random/:id",tournamentController.random) 
 
 module.exports = router
