@@ -4,6 +4,7 @@ import axios from "../../axiosConfig";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import Auth from "../../components/Auth/Auth";
+import imageLogin from "../../assets/img_login.png";
 
 function Login() {
   const [login, setLogin] = React.useState("");
@@ -19,15 +20,19 @@ function Login() {
   //   }
   // }, [,isAuthenticated,navigate]);
 
+  async function navigateRegister(){
+    navigate("/register");
+  }
 
   async function handleSubmit() {
     try {
-      const infoType = "email";
+      const infoType = login.includes('@') ? "email" : "username";
+
       const res = await axios.post(
         "/player/login",
-        { login, password ,infoType},
+        { login, password, infoType},
       );
-      if (res.data.statusCode == 111) {
+      if (res.data.statusCode === 111) {
         console.log("LOGADO");
         navigate("/");
       }
@@ -38,30 +43,34 @@ function Login() {
   }
 
   return (
-    <div class="mainClass">
-      <div class="loginDiv">
-        <img id="logo" src={logo} alt="Logo arena"></img>
+
+    <div className="ML_main">
+
+      <div className="ML_panel">
+
+        <h1 className="ML_title">Login</h1>
+        <div className="ML_info">
+
+          <div className="ML_item">
+            <input onChange={(e) => setLogin(e.currentTarget.value)} type="text" name="" id="ML_login" className="ML_input" placeholder="Email" />
+          </div>
+
+          <div className="ML_item">
+            <input onChange={(e) => setPassword(e.currentTarget.value)} type="password" name="" id="ML_password" className="ML_input" placeholder="Senha"/>
+          </div>
+
+        </div>
+        <div className="ML_confirmation">
+          <button onClick={handleSubmit} className="ML_button">Entrar</button>
+          <button onClick={navigateRegister}className="ML_login">Criar uma conta</button>
+        </div>
       </div>
 
-      <div class="loginDiv">
-        <input
-          class="inputs"
-          type="text"
-          onChange={(e) => setLogin(e.currentTarget.value)}
-          placeholder="Email"
-        ></input>
-        <input
-          class="inputs"
-          type="password"
-          onChange={(e) => setPassword(e.currentTarget.value)}
-          placeholder="Senha"
-        ></input>
-        <button onClick={handleSubmit} id="button">
-          ENTRAR
-        </button>
-        <button id="forgot">Esqueci minha senha</button>
+      <div className="ML_image">
+        <img src={imageLogin} alt="Pessoa jogando em um filtro vermelho" />
       </div>
     </div>
+
   );
 }
 export default Login;

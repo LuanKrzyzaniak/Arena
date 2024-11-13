@@ -2,16 +2,102 @@ body{
     height: 100vh;
 }
 
-.R_main{
-    background-color: #202020;
+/* MOBILE */
+
+.MR_main{
+    height: 100vh;
+
+    background-color: darkred;
+    overflow: hidden;
+}
+
+.MR_panel{
+    height: 54vh;
+
+    background-color: black;
+}
+
+.MR_title{
+    width: 100%;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+    color: aliceblue;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MR_info{
+    height: 40vw;
+
     display: flex;
     flex-direction: column;
-    /* border: 1px solid red;  */
+    align-items: center;
+    justify-content:space-between;
+}
 
-    height: 100vh;
+.MR_input{
+    width: 80vw;
+
+    background-color: black;
+    border-color: white;
+    color: white;
+
+    border-width: 1px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.MR_input:focus{
+    outline: none;
+}
+.MR_confirmation{
+    padding-top: 3rem;
+
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+.MR_button{
+    width: 50vw;
+    height: 5.5vh;
+
+    background-color: #C00E12;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+}
+
+.MR_button:active{
+    background-color: darkred;
+}
+
+.MR_login{
+    padding-top: 0.5rem;
+    background-color: transparent;
+    color: white;
+
+    font-size: 15px;
+
+    border:none;
+}
+
+.MR_login:active{
+    border-bottom: 1px solid white;
+}
+
+.MR_image img{
+    width: 100%;
+    height: auto;
+}
+
+/* DESKTOP */
 
 #h1_R{
     margin-top: 0.5;
@@ -22,106 +108,6 @@ body{
     justify-content: center;
     margin-bottom: 0.5em;
 }
-
-.sub_main{
-    height: 40em;
-
-}
-
-.inputs_R{
-    background-color: #202020;
-    padding: 10px 110px 10px 10px;
-    border: none;
-    border-bottom: 2px solid gray;
-    border-radius: 3px;
-    margin-bottom: 3em;
-    color: aliceblue;
-}
-
-.bar{
-    margin-left: .2em;
-    margin-right: .2em;
-}
-
-.date{
-    display: flex;
-    color: #fff;
-    /* border: 1px solid blue; */
-    margin-bottom: 0.5em;
-
-}
-.inputData{
-    font-size: 12px;
-    width: 3.5em;
-    border: none;
-    background-color: transparent;
-    border-bottom: 2px solid gray;
-    border-radius: 3px;
-    color: aliceblue;
-}
-#day{
-    margin-left: 0em;
-}
-
-
-.inputs_R2{
-    background-color: #202020;
-    padding: 10px 10px 10px 10px;
-    width: 9em;
-    border: none;
-    margin-bottom: 2em;
-    border-bottom: 2px solid gray;
-    border-radius: 3px;
-    color: aliceblue;
-
-}
-
-.div_R{
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.div_R2{
-    background-color: #202020;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-
-}
-
-.inputs_test{
-    width: 10em;
-}
-
-#button_R{
-    color: aliceblue;
-    background-color: red;
-    font-size: 12px;
-    border-radius: 4px;
-    padding: 10px;
-    border: none;
-    margin: 1em;
-    width: 14em;
-}
-
-.div_button{
-    margin-top: 2em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-label{float: left;}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-/* DESKTOP */
 
 .org_register{
     display: flex;

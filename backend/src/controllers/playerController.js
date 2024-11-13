@@ -13,11 +13,11 @@ async function create(req, res) {
         pool.release()
         return res.json({ error: "Player already exists", statusCode: 69 })
     }
-    const sizeOfId = Number(process.env.SIZEOF_ID);
+    
     let id = 0
     let playersWithSameId
     do {
-        id = parseInt(Math.random() * 10 * (sizeOfId))
+        id = parseInt(Math.random() * 10 ** parseInt(process.env.SIZEOF_ID))
         console.log(id)
         playersWithSameId = await pool.query("SELECT FROM players WHERE pid=$1", [id])
     } while (playersWithSameId.rowCount != 0)

@@ -37,11 +37,13 @@ const router = createBrowserRouter([
   },
   {
     path: '/register',
-     element: isMobile ? <RegisterPage /> : <RegisterPagePC/>,
+    //element: isMobile ? <RegisterPage /> : <RegisterPagePC/>,
+    element: <RegisterPage/>
   },
   {
     path: '/tournament/register',
-     element: isMobile ? <TournamentRegister /> : <TournamentRegisterPC />,
+     //element: isMobile ? <TournamentRegister /> : <TournamentRegisterPC />,
+    element: <TournamentRegister/>
   },
   {
     path: '/tournament/:id',

@@ -1,72 +1,98 @@
 body{
-    margin:0em;
-    margin-top: 0em;
-}
-
-h1{
-    margin: 0em;
-    margin-top:0em;
-
-}
-
-.mainClass{
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    width: auto;
     height: 100vh;
-    background-color: #000000;
 }
 
-.logoDiv{
-    padding-top: 5em;
+/* MOBILE */
+
+.ML_main{
+    height: 100vh;
+
+    background-color: darkred;
+    overflow: hidden;
+}
+
+.ML_panel{
+    height: 54vh;
+
+    background-color: black;
+}
+
+.ML_title{
+    width: 100%;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+    color: aliceblue;
+
     display: flex;
     align-items: center;
-    justify-content:center;
+    justify-content: center;
 }
 
-#logo{
-    margin-top:8em;
-    margin-bottom:6em;
-    height:8em;
-}
+.ML_info{
+    height: 20vw;
 
-.loginDiv{
     display: flex;
     flex-direction: column;
-    padding: 1em;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.ML_input{
+    width: 80vw;
+
+    background-color: black;
+    border-color: white;
+    color: white;
+
+    border-width: 1px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.ML_input:focus{
+    outline: none;
+}
+.ML_confirmation{
+    padding-top: 3rem;
+
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.inputs{
-    background-color: black;
-    padding: 10px 10px 10px 10px;
+.ML_button{
+    width: 50vw;
+    height: 5.5vh;
+
+    background-color: #C00E12;
+    color: white;
+
     border: none;
-    border-bottom: 2px solid gray;
     border-radius: 5px;
-    color: aliceblue;
-    outline:none
-
-}
-.inputs,.inputs_R,.inputData,.inputs_R2{
-    outline:none;
-
 }
 
-#button{
-    color: aliceblue;
-    background-color: red;
-    font-size: 12px;
-    border-radius: 4px;
-    padding: 10px;
-    border: none;
-    margin: 1em;
-    width: 14em;
+.ML_button:active{
+    background-color: darkred;
 }
 
-#forgot{
-    border: none;
+.ML_login{
+    padding-top: 0.5rem;
     background-color: transparent;
-    color: gray;
+    color: white;
+
+    font-size: 15px;
+
+    border:none;
+}
+
+.ML_login:active{
+    border-bottom: 1px solid white;
+}
+
+.ML_image img{
+    width: 100%;
+    height: auto;
 }

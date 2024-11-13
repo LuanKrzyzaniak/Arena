@@ -1,3 +1,16 @@
+CREATE USER gladiator WITH PASSWORD 'gladiator';
+CREATE USER arenauser WITH PASSWORD 'arenauser';
+
+CREATE DATABASE arena OWNER gladiator;
+
+\c arena gladiator;
+
+ALTER DEFAULT PRIVILEGES 
+    FOR USER gladiator 
+    IN SCHEMA public
+    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO arenauser;
+    
+
 CREATE TABLE players (
     pid INTEGER NOT NULL,
     username VARCHAR(20) UNIQUE NOT NULL,
