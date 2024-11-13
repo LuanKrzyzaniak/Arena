@@ -99,7 +99,7 @@ INSERT INTO team (orgid,sportid,teamname,descr) VALUES (1,1,'OS GURI DO LOL6','H
 -- player ----
 
 CREATE TABLE if NOT EXISTS player (
-    teamid INTEGER NOT NULL,
+    teamid INTEGER NOT NULL
 
 );
 

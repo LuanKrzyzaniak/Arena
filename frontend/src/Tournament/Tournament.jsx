@@ -38,7 +38,10 @@ function Tournament() {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="container">
+      
       {teams.length > 0 ? (
         pairTeams().map((pair, index) => (
           <div key={index} className="match-box">
@@ -55,6 +58,7 @@ function Tournament() {
         <p>Nenhum time encontrado</p>
       )}
     </div>
+    </>
   );
 }
 
