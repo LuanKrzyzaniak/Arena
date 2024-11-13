@@ -41,9 +41,8 @@ const router = createBrowserRouter([
     element: <RegisterPage/>
   },
   {
-    path: '/tournament/register',
-     //element: isMobile ? <TournamentRegister /> : <TournamentRegisterPC />,
-    element: <TournamentRegister/>
+    path: '/tournament/register/:player',
+     element: isMobile ? <TournamentRegister /> : <TournamentRegisterPC />,
   },
   {
     path: '/tournament/:id',

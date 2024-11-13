@@ -75,18 +75,8 @@ function TournamentRegister() {
                         <input onChange={(e) => setTournamentDate(e.currentTarget.value)} className="TR_input" id="tournamentDate" type="date"></input>
                     </div>
 
-                    <div style={{marginLeft: "0.5rem"}}>
-                        <label className="TR_text" for="joinDate">DATA DE INSCRIÇÃO MAX</label>
-                        <input onChange={(e) => setJoinDate(e.currentTarget.value)} className="TR_input" id="joinDate" type="date"></input>
-                    </div>
                 </div>
                 
-                <label className="TR_text" for="prize">PREMIAÇÃO</label>
-                <input onChange={(e) => setPrize(e.currentTarget.value)} className="TR_input" id="prize"></input>
-
-                <label className="TR_text" for="capacity">CAPACIDADE</label>
-                <input onChange={(e) => setCapacity(e.currentTarget.value)} className="TR_input" id="capacity"></input>
-
                 <label className="TR_text" for="sport">sport</label>
                 <select  onChange={(e) => setSport(e.target.value)} className="TR_input" id="sport">
                     <option value={""}>SELECIONE UM E-SPORTE</option>
