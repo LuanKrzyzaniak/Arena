@@ -9,8 +9,9 @@ const { isOwner : organizationIsOwner } = require("../middlewares/organizationMi
 
 router.post("/create/:oid", organizationIsOwner, tournamentController.create)
 router.get("/all", tournamentController.getAll)
-router.get("/:tid", tournamentController.get)
+router.get("/:tid")
 router.delete("/:tid", isOwner, tournamentController.remove)
+router.get("/sports",tournamentController.Sports)
 
 router.post("/:tid/addOrg/:oid", tournamentController.addOrg)
 router.delete("/:tid/removeOrg/:oid", tournamentController.removeOrg)
