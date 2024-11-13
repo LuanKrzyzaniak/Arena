@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {isMobile} from 'react-device-detect';
 
 //routes
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -27,8 +28,7 @@ import Tournament from './Tournament/Tournament';
 const router = createBrowserRouter([
   {
     path: '/',
-    // element: <Home />,
-    element: <HomePC />,
+    element: isMobile ? <Home /> : <HomePC/>,
     errorElement: <ErrorPage />
   },
   {
@@ -37,13 +37,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/register',
-    // element: <RegisterPage />,
-    element: <RegisterPagePC />
+     element: isMobile ? <RegisterPage /> : <RegisterPagePC/>,
   },
   {
     path: '/tournament/register',
-    // element: <TournamentRegister />,
-    element: <TournamentRegisterPC />,
+     element: isMobile ? <TournamentRegister /> : <TournamentRegisterPC />,
   },
   {
     path: '/tournament/:id',
