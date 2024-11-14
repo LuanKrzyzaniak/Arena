@@ -66,14 +66,14 @@ async function get(req, res) {
 async function getAll(req, res) {
     const pool = await db.connect()
 
-    const tournament = await pool.query("SELECT t.tid, t.name as tournamentName, o.oid, o.name as ownerName, t.startDate, s.name as sportName FROM tournaments t JOIN sports s ON t.sport = s.sid JOIN organizations o ON t.owner = o.oid")
+    const tournaments = await pool.query("SELECT t.tid, t.name as tournamentName, o.oid, o.name as ownerName, t.startDate, s.name as sportName FROM tournaments t JOIN sports s ON t.sport = s.sid JOIN organizations o ON t.owner = o.oid")
     const tournamentCompetitors = await pool.query("SELECT o.oid, o.name, tc.tid FROM tournament_competitors tc JOIN organizations o ON tc.oid = o.oid")
 
     pool.release()
 
     let result = []
 
-    tournament.rows.forEach((tournament) => {
+    tournaments.rows.forEach((tournament) => {
         let i = result.push({
             tid: tournament.tid,
             name: tournament.tournamentname,
@@ -81,7 +81,7 @@ async function getAll(req, res) {
                 oid: tournament.oid,
                 name: tournament.ownername
             },
-            startDate: tournament.startDate,
+            startDate: tournament.startdate,
             sport: tournament.sportname,
             competitors: []
         })

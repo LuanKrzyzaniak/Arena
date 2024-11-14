@@ -1,0 +1,91 @@
+.Home {
+    overflow: hidden;
+}
+
+.Home .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    padding-top: 5rem;
+}
+
+.Home .form h1 {
+    color: #fff;
+    font-weight: bold;
+}
+
+.Home .form {
+    margin: 0 3rem;
+}
+
+.Home .form form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.Home .form input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    background: none;
+    font-size: 1.35rem;
+    color: #fff;
+}
+
+.Home .form small#error {
+    color: red;
+    text-align: center;
+    font-size: 1rem;
+    display: none;
+}
+
+.Home .form small#error.active {
+    display: block;
+}
+
+.Home .form small a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.Home .form div#createSmall {
+    text-align: center;
+}
+
+.Home .form .group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.Home .form .group#passGroup {
+    align-items: baseline;
+}
+
+.Home .form button {
+    margin-top: 2rem;
+    width: 12rem;
+    padding: 0.6rem 0;
+    font-size: .9rem;
+    border: none;
+    background-color: #C00E12;
+    color: #fff;
+}
+
+.Home .image {
+    margin-top: 4rem;
+}
+
+.Home .image img {
+    width: 100%;
+    height: auto;
+    filter: blur(1px);
+}
+

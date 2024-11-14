@@ -1,0 +1,42 @@
+.Card {
+    color: #fff;
+    background-color: #272727;
+}
+
+.Card .banner {
+    height: 100px;
+    overflow: hidden;
+}
+
+.Card .banner img {
+    width: 100%;
+    height: fit-content;
+}
+
+.Card .info {
+    margin: 1rem 1rem;
+}
+
+.Card .info .grid {
+    display: grid;
+    font-size: 1.2rem;
+}
+
+.Card .info .grid div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.Card .info .grid p {
+    font-size: 1rem;
+}
+
+.Card button {
+    width: 100%;
+    border: none;
+    height: 2.2rem;
+    color: #fff;
+    background-color: #FF0000;
+    font-weight: bold;
+}

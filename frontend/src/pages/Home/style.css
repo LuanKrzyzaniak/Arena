@@ -1,0 +1,79 @@
+.Home nav {
+    color: #fff;
+    height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+    padding: 0 1rem;
+}
+
+.Home .welcome {
+    color: #fff;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(../../assets/car1.png);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 3rem 0;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+.Home .welcome img {
+    width: 250px;
+    height: auto;
+}
+
+.Home .advertisement {
+    display: none;
+}
+
+.Home .filter {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.Home .filter h2 {
+    margin-top: 2rem;
+    margin-left: 1rem;
+}
+
+
+.Home .filter .games {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    margin: 0 1rem;
+}
+
+.Home .filter .games button {
+    background: none;
+    border: none;
+}
+
+.Home .filter .games img {
+    width: 5rem;
+    height: auto;
+}
+
+.Home .filter .btnFilter {
+    margin-top: 1rem;
+    width: 100%;
+    height: 2.25rem;
+    border-radius: 0;
+    border: 0;
+    background-color: #FF0000;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.Home .tournaments {
+    padding: 2.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: #202020;
+}

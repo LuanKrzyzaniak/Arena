@@ -50,7 +50,7 @@ async function login(req, res) {
 
     const token = jwt.sign({ playerId: player.rows[0].pid }, process.env.TOKEN_SECRET, { expiresIn: "45min" })
 
-    res.cookie("token", token, { secure: true, httpOnly: true, maxAge: 2700000 })
+    res.cookie("token", token, { secure: true, httpOnly: true, maxAge: 2700000, sameSite: "None"  })
     res.json({ msg: "Logged succesfully", statusCode: 111 })
 }
 
@@ -89,13 +89,27 @@ async function getOwn(req, res) {
     const { playerId } = req
 
     const player = await pool.query("SELECT pid, username, email FROM players WHERE pid=$1", [playerId])
+    const playerOrgs = await pool.query("SELECT o.name FROM associated a JOIN organizations o ON a.oid = o.oid WHERE a.pid = $1", [playerId])
 
     pool.release()
 
     if (player.rowCount == 0)
         return res.json({ error: "Player not found", statusCode: 7 })
 
-    res.json({ player: player.rows[0], statusCode: 222 })
+    let result = {
+        pid: player.rows[0].pid,
+        username: player.rows[0].username,
+        email: player.rows[0].email,
+        orgs: []
+    }
+
+    playerOrgs.rows.forEach((row) => {
+        result["orgs"].push({
+            name: row.name
+        })
+    })
+
+    res.json({ player: result, statusCode: 222 })
 }
 
 async function getAll(req, res) {
