@@ -5,8 +5,6 @@ import {isMobile} from 'react-device-detect';
 //routes
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import NewLogin from './pages/NewLogin';
-import NewLoginPC from './pages/NewLogin/indexPC';
 
 import ErrorPage from './pages/Error';
 
@@ -21,7 +19,9 @@ import TournamentRegister from './pages/TournamentRegister';
 import TournamentRegisterPC from './pages/TournamentRegister/indexPC';
 
 import "./index.css";
-import Login from './pages/Login/Login';
+import Login from './pages/Login/index';
+import LoginPC from './pages/Login/indexPC';
+
 
 import Tournament from './Tournament/Tournament';
 import TournamentPC from './Tournament/indexPC';
@@ -37,12 +37,13 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <NewLoginPC />,
+    element: <LoginPC/>
+    //element: isMobile ? <Login /> : <LoginPC/>,
   },
   {
     path: '/register',
     //element: isMobile ? <RegisterPage /> : <RegisterPagePC/>,
-    element: <RegisterPage/>
+    element: <RegisterPagePC/>
   },
   {
     path: '/tournament/register/:player',

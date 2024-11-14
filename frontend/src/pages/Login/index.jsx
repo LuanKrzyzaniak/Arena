@@ -2,8 +2,6 @@ import "./style.css";
 import React, { useEffect, useState } from "react";
 import axios from "../../axiosConfig";
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/logo.png";
-import Auth from "../../components/Auth/Auth";
 import imageLogin from "../../assets/img_login.png";
 
 function Login() {

@@ -17,26 +17,23 @@ function Register() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirm, setConfirm] = React.useState("");
-  const [day, setDay] = React.useState("");
-  const [month, setMonth] = React.useState("");
-  const [year, setYear] = React.useState("");
-
-
 
   const navigate = useNavigate();
 
+  async function navigateLogin(){
+    navigate("/login");
+  }
+
   async function handleSubmit() {
     if (password === confirm) {
-      const birthdate = `${year}-${month}-${day}`;
       try {
-        const res = await axios.post("/user/create", { email, username, birthdate, password });
-        if (res.status === 201) {
+        const res = await axios.post("/player/create", { username, email, password });
+        if (res.data.statusCode === 333) {
           navigate('/login');
-          alert("CRIADO")
         }
       } catch (error) {
         console.log(error);
-        alert("CREDENCIAIS INVALIDAS");
+        alert("Credenciais Inválidas");
       }
     } else {
       alert("Senhas diferentes")
@@ -55,40 +52,31 @@ function Register() {
             <div className="org_text">
 
                 <div className="infos_right">
+                    <div className="info">
+                      <div className="cols_register" id="col_register_left">
+                          <div className="cols_item">
+                              <label htmlFor="" className="label_register" >Nome de Usuario</label>
+                              <input onChange={(e) => {setUsername(e.currentTarget.value)}}type="text" name="" id="" className="inputs_register"  />
+                          </div>
 
-                    <div className="cols_register" id="col_register_left">
-                        
-                            <div className="cols_item">
-                                <label htmlFor="" className="label_register" >Nome de Usuario</label>
-                                <input type="text" name="" id="" className="inputs_register"  />
-                            </div>
-
-                            <div className="cols_item">
-                                <label htmlFor="" className="label_register" > Email </label>
-                                <input type="text" name="" id="" className="inputs_register" />
-                            </div>
-
-                            <div className="cols_item">
-                                <label htmlFor="" className="label_register" >Data de Nascimento</label>
-                                <input type="text" name="" id="" className="inputs_register" />
-                            </div>
+                          <div className="cols_item">
+                              <label htmlFor="" className="label_register" > Email </label>
+                              <input onChange={(e) => {setEmail(e.currentTarget.value)}}type="text" name="" id="" className="inputs_register" />
+                          </div>
+                      </div>
+                      <div className="cols_register">
+                          <div className="cols_item">
+                              <label htmlFor="" className="label_register" >Senha</label>
+                              <input onChange={(e) => {setPassword(e.currentTarget.value)}}type="password" name="" id="" className="inputs_register" />
+                          </div>
+                          <div className="cols_item">
+                              <label htmlFor="" className="label_register" >Confirme sua senha</label>
+                              <input onChange={(e) => {setConfirm(e.currentTarget.value)}}type="password" name="" id="" className="inputs_register" />
+                          </div>
+                      </div>
                     </div>
-                    
-                    <div className="cols_register">
-
-                            <div className="cols_item">
-                                <label htmlFor="" className="label_register" >Telefone</label>
-                                <input type="text" name="" id="" className="inputs_register" />
-                            </div>
-                            <div className="cols_item">
-                                <label htmlFor="" className="label_register" >Senha</label>
-                                <input type="text" name="" id="" className="inputs_register" />
-                            </div>
-                            <div className="cols_item">
-                                <label htmlFor="" className="label_register" >Confirme sua senha</label>
-                                <input type="text" name="" id="" className="inputs_register" />
-                            </div>
-                    </div>
+                    <button onClick={handleSubmit} className="DR_button">Cadastrar</button>
+                    <button onClick={navigateLogin} className="DR_login">Já possui uma conta? Entre aqui</button>
                 </div>
             </div>
         </div>

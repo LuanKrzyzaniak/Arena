@@ -32,9 +32,6 @@ function Register() {
     } else {
       alert("Senhas diferentes")
     }
-
-
-
   }
 
   return (
@@ -43,7 +40,7 @@ function Register() {
 
       <div className="MR_panel">
 
-        <h1 className="MR_title">Cadastro</h1>
+        <h1 className="MR_title">Cadastro de Usuário</h1>
         <div className="MR_info">
 
           <div className="MR_item">

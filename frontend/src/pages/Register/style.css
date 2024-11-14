@@ -145,8 +145,9 @@ body{
     height: 20em;
     width: 50em;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .cols_register{
@@ -175,4 +176,45 @@ body{
     border: none;
     width: 16em;
     margin-top: .5em;
+}
+
+.inputs_register:focus{
+    outline:none;
+}
+
+.info{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.DR_button{
+    width: 15vw;
+    height: 3.5vh;
+
+    background-color: #C00E12;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+}
+
+.DR_button:active{
+    background-color: darkred;
+}
+
+.DR_login{
+    padding-top: 0.5rem;
+    background-color: transparent;
+    color: white;
+    
+
+    font-size: 15px;
+
+    border:none;
+    border-bottom: 1px solid transparent;
+}
+
+.DR_login:hover{
+    border-bottom: 1px solid white;
 }
