@@ -56,6 +56,9 @@ function Home() {
                 </section>
 
                 <section className="car_below">
+                    <div className="subtitle_tounrment">
+                        <h2>Jogos Disponíveis</h2>
+                    </div>
                     <div id="carouselExample" class="carousel slide">
                         <div class="carousel-inner">
                             <div class="carousel-item active">

@@ -22,7 +22,11 @@ import TournamentRegisterPC from './pages/TournamentRegister/indexPC';
 
 import "./index.css";
 import Login from './pages/Login/Login';
+
 import Tournament from './Tournament/Tournament';
+import TournamentPC from './Tournament/indexPC';
+
+import OrganizationPC from './pages/Organizations/indexPC'
 
 
 const router = createBrowserRouter([
@@ -33,7 +37,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <Login />,
+    element: <NewLoginPC />,
   },
   {
     path: '/register',
@@ -44,10 +48,18 @@ const router = createBrowserRouter([
     path: '/tournament/register/:player',
      element: isMobile ? <TournamentRegister /> : <TournamentRegisterPC />,
   },
+  // {
+  //   path: '/tournament/:id',
+  //   // element:<Tournament/>,
+  // },
   {
-    path: '/tournament/:id',
-    element:<Tournament/>
-  }
+    path: '/tournament/test',
+    element:<TournamentPC/>,
+  },
+  {
+    path: '/organization',
+    element:<OrganizationPC/>,
+  },
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

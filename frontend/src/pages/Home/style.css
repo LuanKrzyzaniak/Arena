@@ -122,6 +122,15 @@ a{
     width: 100%;
 }
 
+.subtitle_tounrment{
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1em;
+    color: #fff;
+}
+
 
 .carrousel img{
     height: 18em;
@@ -157,7 +166,7 @@ a{
 }
 
 .car_below{
-    margin-top: 4em;
+    margin-top: 2em;
 }
 .item_car{
     display: flex;
