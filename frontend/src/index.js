@@ -33,8 +33,7 @@ import CreateOrg from './pages/CreateOrg/CreateOrg';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home/>,
-    //element: isMobile ? <Home /> : <HomePC/>,
+    element: isMobile ? <Home /> : <HomePC/>,
     errorElement: <ErrorPage />
   },
   {
