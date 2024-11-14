@@ -261,6 +261,24 @@ async function Sports(req, res) {
   }
 }
 
+async function Formats(req, res) {
+  const dbClient = await db.connect();
+
+  try {
+    const response = await dbClient.query("SELECT * FROM formats");
+
+    dbClient.release();
+    if (response.rowCount === 0) {
+      return res.status(400).json({ message: "No formats available" });
+    } else {
+      return res.status(200).json({ data: response.rows });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: error });
+  }
+}
+
 module.exports = {
   create,
   
@@ -270,4 +288,5 @@ module.exports = {
   removeOrg,
   random,
   Sports,
+  Formats,
 };

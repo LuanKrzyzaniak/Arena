@@ -155,3 +155,11 @@ a{
     margin-bottom: 1em;
 
 }
+
+.fix{
+    margin-bottom: 1rem;
+}
+
+.link_fix{
+    color: white;
+}
