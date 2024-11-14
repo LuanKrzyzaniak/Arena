@@ -6,7 +6,7 @@ async function isOwner(req, res, next) {
     const { playerId } = req
     const { oid } = req.params
 
-    const owner = await pool.query("SELECT type FROM associated WHERE oid = $1 AND pid = $2", [oid, playerId])
+    const owner = await pool.query("SELECT type FROM org_members WHERE oid = $1 AND pid = $2", [oid, playerId])
 
     pool.release()
 

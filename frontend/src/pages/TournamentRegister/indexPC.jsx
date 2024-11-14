@@ -10,32 +10,35 @@ function Register() {
   const [TournamentDate, setTournamentDate] = useState("");
   const [Sport, setSport] = useState("");
   const [sportList, setSportList] = useState([]); 
+  const [Organization, setOrganization] = useState("");
+  const [organizationList, setOrganizationList] = useState([]); 
 
-  const { player } = useParams();
   const navigate = useNavigate();
 
   async function handleSubmit() {
     try {
-      const res = await axios.post(`/tournament/create/${player}`, {
+      console.log(Name, TournamentDate, Sport)
+      const res = await axios.post(`/tournament/create/${Organization}`, {
         Name,
         TournamentDate,
         Sport,
-      });
+      }, {withCredentials: true});
+      console.log(res.data.statusCode)
       if (res.data.status === 333) {
-        navigate("/login");
-        alert("CRIADO");
+        navigate("/");
       }
     } catch (error) {
-      console.log(error);
+      console.log(error);  
       alert("Torneio não criado");
     }
   }
 
   useEffect(() => {
-    getFormat();
+    getSport();
+    getOrganization();
   }, []);
 
-  async function getFormat() {
+  async function getSport() {
     try {
       const resSport = await axios.get("/tournament/sports");
       const auxSport = resSport.data.data; 
@@ -46,6 +49,19 @@ function Register() {
     }
   }
 
+  async function getOrganization() {
+    try {
+      const resOrgs = await axios.get("/player/", {
+        withCredentials: true
+      });
+      console.log(resOrgs)
+      const auxOrgs = resOrgs.data.data.orgs; 
+      setOrganizationList(auxOrgs || []); 
+    } catch (error) {
+      console.log(error);
+      setOrganizationList([]); 
+    }
+  }
   return (
     <div className="org_register">
       <NavbarPC />
@@ -55,8 +71,8 @@ function Register() {
         </div>
 
         <div className="org_text">
-          <div className="infos_right">
-            <div className="cols_register" id="col_register_left">
+          <div className="DTR_info">
+            <div className="TR_panel" id="col_register_left">
               <div className="cols_item">
                 <label htmlFor="" className="label_register">
                   Nome do Torneio
@@ -78,18 +94,22 @@ function Register() {
                   className="inputs_register"
                 />
               </div>
+
+              
             </div>
 
-            <div className="cols_register">
+            <div className="TR_panel" id="col_register_left">
+
+            <div className="cols_item">
               <label className="TR_text" htmlFor="sport">
                 Esporte
               </label>
               <select
                 onChange={(e) => setSport(e.target.value)}
-                className="TR_input"
+                className="inputs_register"
                 id="sport"
               >
-                <option value="">SELECIONE UM E-SPORTE</option>
+                <option value="">SELECIONE UM ESPORTE</option>
                 {sportList && sportList.length > 0 ? (
                   sportList.map((i) => (
                     <option key={i.sid} value={i.sid}>
@@ -100,12 +120,37 @@ function Register() {
                   <option disabled>Carregando esportes...</option>
                 )}
               </select>
+              </div>
+
+              <div className="cols_item">
+              <label className="TR_text" htmlFor="org">
+                Organização
+              </label>
+              <select
+                onChange={(e) => setOrganization(e.target.value)}
+                className="inputs_register"
+                id="org"
+              >
+                <option value="">SELECIONE UMA ORGANIZAÇÃO</option>
+                {sportList && sportList.length > 0 ? (
+                  organizationList.map((i) => (
+                    <option key={i.sid} value={i.sid}>
+                      {i.name}
+                    </option>
+                  ))
+                ) : (
+                  <option disabled>Carregando esportes...</option>
+                )}
+              </select>
+              </div>
+
               <div className="div_button">
-                <button onClick={handleSubmit} id="button_R">
+                <button onClick={handleSubmit} id="button_R" className="DTR_button">
                   CADASTRAR
                 </button>
               </div>
             </div>
+
           </div>
         </div>
       </div>

@@ -60,7 +60,7 @@ async function get(req, res) {
     const { pid } = req.params
 
     const player = await pool.query("SELECT pid, username FROM players WHERE pid=$1", [pid])
-    const playerOrgs = await pool.query("SELECT o.name FROM associated a JOIN organizations o ON a.oid = o.oid WHERE a.pid = $1", [pid])
+    const playerOrgs = await pool.query("SELECT o.name FROM org_members a JOIN organizations o ON a.oid = o.oid WHERE a.pid = $1", [pid])
 
     pool.release()
 
@@ -89,13 +89,14 @@ async function getOwn(req, res) {
     const { playerId } = req
 
     const player = await pool.query("SELECT pid, username, email FROM players WHERE pid=$1", [playerId])
+    const playerOrgs = await pool.query("SELECT o.name, o.oid FROM org_members a JOIN organizations o ON a.oid = o.oid WHERE a.pid = $1", [playerId])
 
     pool.release()
 
     if (player.rowCount == 0)
         return res.json({ error: "Player not found", statusCode: 7 })
 
-    res.json({ player: player.rows[0], statusCode: 222 })
+    res.json({ player: player.rows[0], orgs: playerOrgs.rows, statusCode: 222 })
 }
 
 async function getAll(req, res) {
