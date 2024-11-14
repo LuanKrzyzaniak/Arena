@@ -108,6 +108,10 @@ a{
     text-decoration: none;
 }
 
+.text_nav a {
+    color: inherit;          /* Usa a cor de texto padrão */
+    text-decoration: none;   /* Remove o sublinhado */
+}
 
 /* DESKTOP */
 

@@ -1,0 +1,70 @@
+.TR_div_main{
+    background-color: #202020;
+    height: 100vh;
+    padding-top: var(--navbar-height);
+}
+
+.TR_title{
+    color: aliceblue;
+    font-weight: 700;
+
+    padding-top: 1em;
+    margin-bottom: 0.5em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.TR_div_form{
+    margin-left: 2rem;
+    margin-right: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.TR_input{
+    width: 100%;
+    height: 1.7rem;
+    margin-bottom: 1.5em;
+
+    border-radius: 3px;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+
+    color: white;
+
+    background-color: #2d2d2d;
+}
+
+.TR_text{
+    color: aliceblue;
+    margin-bottom: 0.15em;
+
+}
+
+.TR_div_dates{
+    display: flex;
+    align-items: center;
+}
+
+.TR_button{
+    width: 80%;
+    height: 2rem;
+
+    border-radius: 2px;
+    border: none;
+
+    background-color: #C00E12;
+}
+
+.TR_div_button{
+    display:flex;
+    justify-content: center;
+}
+
+/* DESKTOP */
+
+.bg_tournment{
+    background-image: url('../../assets/bg_tournament.png');
+}

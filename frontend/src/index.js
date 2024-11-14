@@ -27,6 +27,7 @@ import Tournament from './Tournament/Tournament';
 import TournamentPC from './Tournament/indexPC';
 
 import OrganizationPC from './pages/Organizations/indexPC'
+import CreateOrg from './pages/CreateOrg/CreateOrg';
 
 
 const router = createBrowserRouter([
@@ -37,22 +38,20 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <LoginPC/>
-    //element: isMobile ? <Login /> : <LoginPC/>,
+    element: isMobile ? <Login /> : <LoginPC/>,
   },
   {
     path: '/register',
-    //element: isMobile ? <RegisterPage /> : <RegisterPagePC/>,
-    element: <RegisterPagePC/>
+    element: isMobile ? <RegisterPage /> : <RegisterPagePC/>,
   },
   {
     path: '/tournament/register/:player',
      element: isMobile ? <TournamentRegister /> : <TournamentRegisterPC />,
   },
-  // {
-  //   path: '/tournament/:id',
-  //   // element:<Tournament/>,
-  // },
+   {
+     path: '/tournament/:id',
+      element:<Tournament/>,
+ },
   {
     path: '/tournament/test',
     element:<TournamentPC/>,
@@ -61,6 +60,10 @@ const router = createBrowserRouter([
     path: '/organization',
     element:<OrganizationPC/>,
   },
+  {
+    path:"/createorg/:id",
+    element:<CreateOrg/>
+  }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

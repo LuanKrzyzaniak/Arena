@@ -1,4 +1,5 @@
 import logo from "../../assets/logo_def.png";
+import { Link } from 'react-router-dom';
 import "./style.css";
 
 
@@ -11,19 +12,19 @@ function Navbar(){
                         <img src={logo} alt="Logo" />
                     </div>
 
-                    <a href="#">
+                    
                         <div className='text_nav'>
-                            <p className="bold_text">PÁGINA INICIAL</p>
+                           <Link className="text_nav" to={"/"}> Pagina inicial</Link>
                         </div>
-                    </a>
+                    
 
                     <div className='line_sidebar_home'></div>
 
-                    <a href="#">
+                    
                         <div className='text_nav'>
-                            <p className="bold_text" >TORNEIOS</p>
+                        <Link className="link" to={"/organization"}> Torneios</Link>
                         </div>
-                    </a>
+                    
 
                     <div className='line_sidebar_home'></div>
 
