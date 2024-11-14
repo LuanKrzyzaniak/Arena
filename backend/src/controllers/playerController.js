@@ -17,7 +17,7 @@ async function create(req, res) {
     let id = 0
     let playersWithSameId
     do {
-        id = parseInt(Math.random() * 10 ** parseInt(process.env.SIZEOF_ID))
+        id = parseInt(Math.random() * 10 * parseInt(process.env.SIZEOF_ID))
         console.log(id)
         playersWithSameId = await pool.query("SELECT FROM players WHERE pid=$1", [id])
     } while (playersWithSameId.rowCount != 0)
@@ -35,6 +35,7 @@ async function login(req, res) {
     const pool = await db.connect()
 
     const { login, password, infoType } = req.body
+    
 
     const player = await pool.query(`SELECT pid, password FROM players WHERE ${infoType}=$1`, [login])
 
@@ -49,7 +50,6 @@ async function login(req, res) {
     }
 
     const token = jwt.sign({ playerId: player.rows[0].pid }, process.env.TOKEN_SECRET, { expiresIn: "45min" })
-
     res.cookie("token", token, { secure: true, httpOnly: true, maxAge: 2700000 })
     res.json({ msg: "Logged succesfully", statusCode: 111 })
 }

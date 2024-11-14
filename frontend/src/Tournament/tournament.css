@@ -1,69 +1,50 @@
-.container{
-  background-color: red;
+.team-box {
+  display: inline-block;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+  font-size: 16px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100px;
 }
-
-.sub_main_tournament{
-  /* border: 1px solid orange; */
+.container {
   display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: center; */
-  height: 100vh;
-  width: 100%;
+  flex-wrap: wrap;
+  gap: 10px;
 }
-
-.title_t{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  margin-top: 1em;
-}
-
-.img_game{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1em;
-}
-
-.img_game img{
-  width: 20em;
-}
-/* 
-.info_tournament{
-  background-color: purple;
-} */
-
-.info_game{
-  display: flex;
-  width: 100%;
-  margin-top: 1em;
-  /* justify-content: space-between ; */
-  padding-left: 5em;
-}
-
-.ig_left{
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  margin-top: 20px;
 }
 
-.ig_right{
-  color: #fff;
+.match-box {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-left: 5em;
+  justify-content: space-around;
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
 }
 
-.description{
-  color: #fff;
-  padding: 20px 30px 5px 3em;
-  text-align: justify;
+.team-box {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  width: 100px;
+  font-weight: bold;
 }
 
-
+.vs {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}

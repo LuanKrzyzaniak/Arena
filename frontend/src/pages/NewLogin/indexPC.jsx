@@ -5,19 +5,33 @@ import './style.css';
 import logo from '../../assets/logo_def.png';
 import imgLogin from '../../assets/img_login.png';
 import FormSubmitButton from '../../components/FormSubmitButton';
-import axios from 'axios';
+import axios from '../../axiosConfig';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPC() {
+  const navigate = useNavigate()
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  const [login, setLogin] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-    const response = await axios.post("/user/login",
-      { usename: e.target[0].value, password: e.target[1].value },
-      { withCredentials: true }
-    );
+  async function handleSubmit() {
+    try {
+      const infoType = login.includes('@') ? "email" : "username";
 
-    console.log(response);
+      const res = await axios.post(
+        "/player/login",
+        { login, password, infoType},
+      );
+      if (res.data.statusCode === 111) {
+        console.log("LOGADO");
+        navigate("/");
+      }else{
+        alert("Credenciais invalidas")
+      }
+    } catch (error) {
+      console.log(error);
+      alert("CREDENCIAIS INVALIDAS");
+    }
   }
 
   return (
@@ -30,10 +44,10 @@ function LoginPC() {
             <img src={logo} alt="" />
         </div>
         <div className='inputs_right'>
-            <input type="text" placeholder='Nome de Usuário' />
-            <input type="text" placeholder='Senha'  />
+            <input onChange={(e)=>{setLogin(e.currentTarget.value)}} type="text" placeholder='Nome de Usuário' />
+            <input onChange={(e)=>{setPassword(e.currentTarget.value)}} type="text" placeholder='Senha'  />
             
-            <button className='btn_login'>Entrar</button>
+            <button onClick={handleSubmit} className='btn_login'>Entrar</button>
         </div>
      </section>
     </div>
